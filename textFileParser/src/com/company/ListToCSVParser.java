@@ -22,7 +22,7 @@ public class ListToCSVParser {
 
         BufferedWriter writer = Files.newBufferedWriter(destinationFile,ENCODING);
 
-        try (Scanner scanner =  new Scanner(sourceFile, ENCODING.name())){
+        try (Scanner scanner = new Scanner(sourceFile, ENCODING.name())){
             while (scanner.hasNextLine()){
                 //process each line
                 String temp = scanner.nextLine();
@@ -32,11 +32,12 @@ public class ListToCSVParser {
 
                 log(temp);
             }
+            scanner.close();
+            writer.close();
         }
     }
 
     private static void log(Object message){
         System.out.println(String.valueOf(message));
     }
-
 } 
