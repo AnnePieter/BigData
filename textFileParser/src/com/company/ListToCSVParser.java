@@ -24,11 +24,13 @@ public class ListToCSVParser {
 
         try (Scanner scanner =  new Scanner(sourceFile, ENCODING.name())){
             while (scanner.hasNextLine()){
-                //process each line in some way
-                writer.write(scanner.nextLine());
+                //process each line
+                String temp = scanner.nextLine();
+
+                writer.write(temp);
                 writer.newLine();
 
-                log(scanner.nextLine());
+                log(temp);
             }
         }
     }
