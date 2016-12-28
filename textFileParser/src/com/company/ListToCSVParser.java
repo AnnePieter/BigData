@@ -23,41 +23,52 @@ public class ListToCSVParser {
         BufferedWriter writer = Files.newBufferedWriter(destinationFile,ENCODING);
 
         try (Scanner scanner = new Scanner(sourceFile, ENCODING.name())){
+            //skip file documentation
+            while (scanner.hasNextLine()){
+                String line = scanner.nextLine();
+                if (line.contains("LIST")){
+                    scanner.nextLine(); //skip an additional line
+                    break;
+                }
+            }
+
             while (scanner.hasNextLine()){
                 //process each line
-                String temp = scanner.nextLine();
-                temp = temp.replace(")}",";");
-                temp = temp.replace("(#","#");
-                temp = temp.replace("\"","");
-                temp = temp.replace("(",";");
-                temp = temp.replace(")",";");
-                temp = temp.replace("{","");
-                temp = temp.replace("}}","");
-                temp = temp.replace("\t",";");
+                String line = scanner.nextLine();
 
-                for(int i =0;i<10;i++)
+                line = line.replace(")}"    ,";");
+                line = line.replace("(#"	,"#");
+                line = line.replace("\""    ,"");
+                line = line.replace("("     ,";");
+                line = line.replace(")"     ,";");
+                line = line.replace("{"     ,"");
+                line = line.replace("}}"    ,"");
+                line = line.replace("\t"    ,";");
+
+                for(int i = 0; i < 10; i++)
                 {
                     String repstr = ";;;;";
-                    temp = temp.replace(repstr,";;;");
+                    line = line.replace(repstr,";;;");
                 }
-                char[] chararr = temp.toCharArray();
+
                 int count = 0;
-                for(int x = 0; x < temp.length();x++)
+                for(int x = 0; x < line.length(); x++)
                 {
-                    if(chararr[x] == ';')
+                    if(line.charAt(x) == ';')
                     {
                         count++;
                     }
                 }
+
                 while(count > 3) {
-                    temp = temp.replace(";;", ";");
+                    line = line.replace(";;", ";");
                     count--;
                 }
 
-                writer.write(temp);
+                writer.write(line);
                 writer.newLine();
 
-                log(temp);
+                log(line);
             }
             scanner.close();
             writer.close();

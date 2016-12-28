@@ -10,7 +10,6 @@ public class Main {
     static JFileChooser chooser = new JFileChooser();
     static boolean quit = false;
 
-
     public static void main(String... aArgs) throws IOException {
         while (!quit){
             ListToCSVParser text = new ListToCSVParser();
@@ -23,8 +22,8 @@ public class Main {
             }
             if (returnVal == JFileChooser.CANCEL_OPTION) {
                 quit = true;
+                break;
             }
-
 
             //final String sourceFile = chooser.getSelectedFile().toString();
             final String outputFile = sourceFile + ".csv";
