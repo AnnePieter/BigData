@@ -19,18 +19,18 @@ public class Main {
                 sourceFile = chooser.getSelectedFile().toString();
                 sourceFile = sourceFile.replace("\\", "/");
                 ListToCSVParser.log(sourceFile);
+                //final String sourceFile = chooser.getSelectedFile().toString();
+                final String outputFile = sourceFile + ".csv";
+                ListToCSVParser.log(outputFile);
+
+                //parse the sourceFile to the outputFile
+                text.ParseFile(sourceFile, outputFile);
             }
             if (returnVal == JFileChooser.CANCEL_OPTION) {
                 quit = true;
-                break;
             }
 
-            //final String sourceFile = chooser.getSelectedFile().toString();
-            final String outputFile = sourceFile + ".csv";
-            ListToCSVParser.log(outputFile);
 
-            //parse the sourceFile to the outputFile
-            text.ParseFile(sourceFile, outputFile);
     }
 }
 }
