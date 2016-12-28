@@ -26,6 +26,31 @@ public class ListToCSVParser {
             while (scanner.hasNextLine()){
                 //process each line
                 String temp = scanner.nextLine();
+                temp = temp.replace(")}",";");
+                temp = temp.replace("\"","");
+                temp = temp.replace("(",";");
+                temp = temp.replace(")",";");
+                temp = temp.replace("{","");
+                temp = temp.replace("}}","");
+                temp = temp.replace("\t",";");
+                for(int i =0;i<10;i++)
+                {
+                    String repstr = ";;;;";
+                    temp = temp.replace(repstr,";;;");
+                }
+                char[] chararr = temp.toCharArray();
+                int count = 0;
+                for(int x = 0; x < temp.length();x++)
+                {
+                    if(chararr[x] == ';')
+                    {
+                        count++;
+                    }
+                }
+                while(count > 4) {
+                    temp = temp.replace(";;", ";");
+                    count--;
+                }
 
                 writer.write(temp);
                 writer.newLine();

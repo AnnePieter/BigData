@@ -7,8 +7,8 @@ public class Main {
     public static void main(String... aArgs) throws IOException {
         ListToCSVParser text = new ListToCSVParser();
 
-        final String sourceFile = "D://Downloads//countries.list//countries.list";
-        final String outputFile = "D://Downloads//countries.list//output.csv";
+        final String sourceFile = "C://users//annepieter//Downloads//countries.list//countries.list";
+        final String outputFile = "C://users//annepieter//Downloads//countries.list//countries.list.csv";
 
         //parse the sourceFile to the outputFile
         text.ParseFile(sourceFile, outputFile);
