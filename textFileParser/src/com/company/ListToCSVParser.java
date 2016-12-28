@@ -27,12 +27,14 @@ public class ListToCSVParser {
                 //process each line
                 String temp = scanner.nextLine();
                 temp = temp.replace(")}",";");
+                temp = temp.replace("(#","#");
                 temp = temp.replace("\"","");
                 temp = temp.replace("(",";");
                 temp = temp.replace(")",";");
                 temp = temp.replace("{","");
                 temp = temp.replace("}}","");
                 temp = temp.replace("\t",";");
+
                 for(int i =0;i<10;i++)
                 {
                     String repstr = ";;;;";
@@ -47,7 +49,7 @@ public class ListToCSVParser {
                         count++;
                     }
                 }
-                while(count > 4) {
+                while(count > 3) {
                     temp = temp.replace(";;", ";");
                     count--;
                 }
@@ -62,7 +64,7 @@ public class ListToCSVParser {
         }
     }
 
-    private static void log(Object message){
+    public static void log(Object message){
         System.out.println(String.valueOf(message));
     }
 } 
