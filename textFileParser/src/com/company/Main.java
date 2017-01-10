@@ -1,3 +1,7 @@
+/**
+    Made by Anne Pieter Boonstra & Robert Bijl
+ */
+
 package com.company;
 
 import javax.swing.*;
