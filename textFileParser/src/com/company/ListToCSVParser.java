@@ -59,6 +59,7 @@ public class ListToCSVParser {
     }
 
     public String MoviesList(String line){
+
         //Get movie (or serie) name
         String movieName = "";
         int end = line.lastIndexOf("\"");
@@ -67,6 +68,13 @@ public class ListToCSVParser {
             movieName = movieName.replace("\"","").trim();
 
             line = line.substring(end + 1, line.length()).trim();
+        }
+        else{
+            end = line.indexOf("(");
+            movieName = line.substring(0, end);
+            movieName = movieName.trim();
+
+            line = line.substring(end, line.length()).trim();
         }
 
         //Get release year
