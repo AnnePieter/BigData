@@ -61,20 +61,54 @@ public class ListToCSVParser {
         //Check for actor
         if (!(line.startsWith("\t"))){
             int end = line.indexOf("\t");
-            currentActor = line.substring(1, end);
-            currentActor.trim();
+            currentActor = line.substring(0, end + 1);
+            currentActor = currentActor.trim();
 
-            line = line.substring(end, line.length());
+            line = line.substring(end, line.length()).trim();
         }
 
         //Get movie name
+        String currentMovie = "";
         int end = line.indexOf("(");
-        if (end != -1)
-        {
-            String currentMovie = line.substring(0, end);
+        if (end != -1) {
+            currentMovie = line.substring(0, end);
+            currentMovie = currentMovie.trim();
+
+            line = line.substring(end, line.length()).trim();
         }
 
-        line = currentActor + ";" + ";";
+        //Get release year
+        String currentYear = "";
+        end = line.indexOf(")");
+        if (end != -1) {
+            currentYear = line.substring(0, end + 1);
+            //currentYear.replace("(", "");
+            currentYear = currentYear.trim();
+
+            line = line.substring(end + 1, line.length()).trim();
+        }
+
+        //Get serie episode name
+        String currentEpName = "";
+        end = line.indexOf("}");
+        if (end != -1){
+            currentEpName = line.substring(0, end + 1);
+            currentEpName = currentEpName.replace("{","").replace("}","").trim();
+
+            line = line.substring(end + 1, line.length()).trim();
+        }
+
+        //Get actor role
+        String currentActorRole = "";
+        end = line.indexOf("]");
+        if (end != -1){
+            currentActorRole = line.substring(0, end + 1);
+            currentActorRole = currentActorRole.replace("[","").replace("]","").trim();
+
+            line = line.substring(end + 1, line.length()).trim();
+        }
+
+        line = currentActor + ";" + currentMovie + ";" + currentYear + ";" + currentEpName + ";" + currentActorRole + ";";
 
         return line.trim();
     }
