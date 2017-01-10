@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class ListToCSVParser {
 
@@ -44,7 +45,8 @@ public class ListToCSVParser {
                 if (line.isEmpty())
                     continue;
 
-                line = MoviesList(line);
+                //line = MoviesList(line);
+                line = MoviesListRegex(line);
                 //line = CountriesList(line);
                 //line = ActorsList(line);
 
@@ -59,7 +61,6 @@ public class ListToCSVParser {
     }
 
     public String MoviesList(String line){
-
         //Get movie (or serie) name
         String movieName = "";
         int end = line.lastIndexOf("\"");
@@ -99,6 +100,19 @@ public class ListToCSVParser {
 
         line = movieName + ";" + releaseYear + ";" + episodeInfo;
 
+        return line;
+    }
+
+    public String MoviesListRegex(String line){
+        final String regex = "^([\\s\\S]*)\\(([\\d{4}]*|\\?*)(?:\\/)?([\\w]*)?\\)(\\s*\\{([\\w!\\s:;\\/\\.\\-\\'\"?`_&@$%^*<>~+=\\|\\,\\(\\)]*)(\\s*\\(#([\\d]*)\\.([\\d]*)\\))?\\})?\\s*([\\d{4}]*)?(?:-)?([\\d{4}]*)?";
+
+        Pattern r = Pattern.compile(regex, Pattern.MULTILINE);
+        Matcher m = r.matcher(line);
+
+        if(m.find()){
+            line = m.group(1) + ";" + m.group(2) + ";" + m.group(5) + ";";
+            line = line.replace("null","");
+        }
         return line;
     }
 
