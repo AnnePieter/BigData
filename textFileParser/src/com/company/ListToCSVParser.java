@@ -43,8 +43,10 @@ public class ListToCSVParser {
 
                 if (line.isEmpty())
                     continue;
+
+                line = MoviesList(line);
                 //line = CountriesList(line);
-                line = ActorsList(line);
+                //line = ActorsList(line);
 
                 writer.write(line);
                 writer.newLine();
@@ -54,6 +56,42 @@ public class ListToCSVParser {
             scanner.close();
             writer.close();
         }
+    }
+
+    public String MoviesList(String line){
+        //Get movie (or serie) name
+        String movieName = "";
+        int end = line.lastIndexOf("\"");
+        if (end != -1){
+            movieName = line.substring(0, end + 1);
+            movieName = movieName.replace("\"","").trim();
+
+            line = line.substring(end + 1, line.length()).trim();
+        }
+
+        //Get release year
+        String releaseYear = "";
+        end = line.indexOf(")");
+        if (end != -1){
+            releaseYear = line.substring(0, end + 1);
+            releaseYear = releaseYear.replace("(","").replace(")","").trim();
+
+            line = line.substring(end + 1, line.length()).trim();
+        }
+
+        //Get episode name (if exists)
+        String episodeInfo = "";
+        end = line.lastIndexOf("}");
+        if (end != -1){
+            episodeInfo = line.substring(0, end + 1);
+            episodeInfo = episodeInfo.replace("{","").replace("}","").trim();
+
+            line = line.substring(end + 1, line.length()).trim();
+        }
+
+        line = movieName + ";" + releaseYear + ";" + episodeInfo;
+
+        return line;
     }
 
     String currentActor = "";
@@ -67,48 +105,47 @@ public class ListToCSVParser {
             line = line.substring(end, line.length()).trim();
         }
 
-        //Get movie name
-        String currentMovie = "";
+        //Get movie (or serie) name
+        String movieName = "";
         int end = line.indexOf("(");
         if (end != -1) {
-            currentMovie = line.substring(0, end);
-            currentMovie = currentMovie.trim();
+            movieName = line.substring(0, end);
+            movieName = movieName.trim();
 
             line = line.substring(end, line.length()).trim();
         }
 
         //Get release year
-        String currentYear = "";
+        String releaseYear = "";
         end = line.indexOf(")");
         if (end != -1) {
-            currentYear = line.substring(0, end + 1);
-            //currentYear.replace("(", "");
-            currentYear = currentYear.trim();
+            releaseYear = line.substring(0, end + 1);
+            releaseYear = releaseYear.replace("(","").replace(")","").trim();
 
             line = line.substring(end + 1, line.length()).trim();
         }
 
-        //Get serie episode name
-        String currentEpName = "";
+        //Get serie episode name (if found)
+        String episodeName = "";
         end = line.indexOf("}");
         if (end != -1){
-            currentEpName = line.substring(0, end + 1);
-            currentEpName = currentEpName.replace("{","").replace("}","").trim();
+            episodeName = line.substring(0, end + 1);
+            episodeName = episodeName.replace("{","").replace("}","").trim();
 
             line = line.substring(end + 1, line.length()).trim();
         }
 
         //Get actor role
-        String currentActorRole = "";
+        String actorRole = "";
         end = line.indexOf("]");
         if (end != -1){
-            currentActorRole = line.substring(0, end + 1);
-            currentActorRole = currentActorRole.replace("[","").replace("]","").trim();
+            actorRole = line.substring(0, end + 1);
+            actorRole = actorRole.replace("[","").replace("]","").trim();
 
             line = line.substring(end + 1, line.length()).trim();
         }
 
-        line = currentActor + ";" + currentMovie + ";" + currentYear + ";" + currentEpName + ";" + currentActorRole + ";";
+        line = currentActor + ";" + movieName + ";" + releaseYear + ";" + episodeName + ";" + actorRole + ";";
 
         return line.trim();
     }
