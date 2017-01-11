@@ -1,67 +1,19 @@
 /**
- Made by Anne Pieter Boonstra & Robert Bijl
+ * Made by Anne Pieter Boonstra & Robert Bijl
  */
 
 package com.company;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-public class ListToCSVParser {
+public class ParserMethods {
 
-    final static Charset ENCODING = StandardCharsets.ISO_8859_1;
-    //final static Map<String, String> conversionMethods = new HashMap<>();
-
-    void ParseFile(String fileToConvert, String fileToConvertTo) throws IOException {
-        Path sourceFile = Paths.get(fileToConvert);
-        Path destinationFile = Paths.get(fileToConvertTo);
-
-        BufferedWriter writer = Files.newBufferedWriter(destinationFile,ENCODING);
-
-        try (Scanner scanner = new Scanner(sourceFile, ENCODING.name())){
-            //skip file documentation
-            while (scanner.hasNextLine()){
-                String line = scanner.nextLine();
-                if (line.contains("LIST")){
-                    scanner.nextLine(); //skip an additional line
-                    break;
-                }
-            }
-
-            while (scanner.hasNextLine()){
-                //process each line
-                String line = scanner.nextLine();
-
-                if (line.isEmpty())
-                    continue;
-                if (line.contains("-----------------------------------------------------------------------------"))
-                    break;
-
-                //line = MoviesList(line);
-                //line = MoviesListRegex(line, "^([\\s\\S]*)\\(([\\d{4}]*|\\?*)(?:\\/)?([\\w]*)?\\)(\\s*\\{([\\w!\\s:;\\/\\.\\-\\'\"?`_&@$%^*<>~+=\\|\\,\\(\\)]*)(\\s*\\(#([\\d]*)\\.([\\d]*)\\))?\\})?\\s*([\\d{4}]*)?(?:-)?([\\d{4}]*)?");
-                //line = CountriesList(line);
-                line = ActorsList(line);
-
-                writer.write(line);
-                writer.newLine();
-
-                log(line);
-            }
-            scanner.close();
-            writer.close();
-        }
-    }
-
+    /** Method for converting movies.list */
     public String MoviesList(String line){
+        if(line.contains("SUSPENDED"))
+            return "";
+
         //Get movie (or serie) name
         String movieName = "";
         int end = line.lastIndexOf("\"");
@@ -104,6 +56,7 @@ public class ListToCSVParser {
         return line;
     }
 
+    /** Method for converting movies.list with a regex (This is a test) */
     public String MoviesListRegex(String line, String reg){
         final String regex = reg;
 
@@ -118,6 +71,7 @@ public class ListToCSVParser {
     }
 
     String currentActor = "";
+    /** Method for converting actors.list */
     public String ActorsList(String line){
         //Check for actor
         if (!(line.startsWith("\t"))){
@@ -173,6 +127,7 @@ public class ListToCSVParser {
         return line.trim();
     }
 
+    /** Method for converting countries.list */
     public String CountriesList(String line){
         line = line.replace(")}"    ,";");
         line = line.replace("(#"	,"#");
@@ -206,7 +161,4 @@ public class ListToCSVParser {
         return line;
     }
 
-    public static void log(Object message){
-        System.out.println(String.valueOf(message));
-    }
 } 
