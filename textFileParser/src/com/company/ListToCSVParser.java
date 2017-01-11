@@ -45,8 +45,8 @@ public class ListToCSVParser {
                 if (line.isEmpty())
                     continue;
 
-                //line = MoviesList(line);
-                line = MoviesListRegex(line);
+                line = MoviesList(line);
+                //line = MoviesListRegex(line, "^([\\s\\S]*)\\(([\\d{4}]*|\\?*)(?:\\/)?([\\w]*)?\\)(\\s*\\{([\\w!\\s:;\\/\\.\\-\\'\"?`_&@$%^*<>~+=\\|\\,\\(\\)]*)(\\s*\\(#([\\d]*)\\.([\\d]*)\\))?\\})?\\s*([\\d{4}]*)?(?:-)?([\\d{4}]*)?");
                 //line = CountriesList(line);
                 //line = ActorsList(line);
 
@@ -98,20 +98,20 @@ public class ListToCSVParser {
             line = line.substring(end + 1, line.length()).trim();
         }
 
-        line = movieName + ";" + releaseYear + ";" + episodeInfo;
+        line = movieName + ";" + releaseYear + ";" + episodeInfo + ";";
 
         return line;
     }
 
-    public String MoviesListRegex(String line){
-        final String regex = "^([\\s\\S]*)\\(([\\d{4}]*|\\?*)(?:\\/)?([\\w]*)?\\)(\\s*\\{([\\w!\\s:;\\/\\.\\-\\'\"?`_&@$%^*<>~+=\\|\\,\\(\\)]*)(\\s*\\(#([\\d]*)\\.([\\d]*)\\))?\\})?\\s*([\\d{4}]*)?(?:-)?([\\d{4}]*)?";
+    public String MoviesListRegex(String line, String reg){
+        final String regex = reg;
 
         Pattern r = Pattern.compile(regex, Pattern.MULTILINE);
         Matcher m = r.matcher(line);
 
         if(m.find()){
             line = m.group(1) + ";" + m.group(2) + ";" + m.group(5) + ";";
-            line = line.replace("null","");
+            //line = line.replace("null","");
         }
         return line;
     }
