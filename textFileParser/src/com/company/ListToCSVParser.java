@@ -12,15 +12,14 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 public class ListToCSVParser {
 
     final static Charset ENCODING = StandardCharsets.ISO_8859_1;
+    //final static Map<String, String> conversionMethods = new HashMap<>();
 
     void ParseFile(String fileToConvert, String fileToConvertTo) throws IOException {
         Path sourceFile = Paths.get(fileToConvert);
@@ -44,11 +43,13 @@ public class ListToCSVParser {
 
                 if (line.isEmpty())
                     continue;
+                if (line.contains("-----------------------------------------------------------------------------"))
+                    break;
 
-                line = MoviesList(line);
+                //line = MoviesList(line);
                 //line = MoviesListRegex(line, "^([\\s\\S]*)\\(([\\d{4}]*|\\?*)(?:\\/)?([\\w]*)?\\)(\\s*\\{([\\w!\\s:;\\/\\.\\-\\'\"?`_&@$%^*<>~+=\\|\\,\\(\\)]*)(\\s*\\(#([\\d]*)\\.([\\d]*)\\))?\\})?\\s*([\\d{4}]*)?(?:-)?([\\d{4}]*)?");
                 //line = CountriesList(line);
-                //line = ActorsList(line);
+                line = ActorsList(line);
 
                 writer.write(line);
                 writer.newLine();

@@ -9,13 +9,13 @@ import java.io.IOException;
  * Created by Robert on 11-1-2017.
  */
 public class FileConverter {
-    private JButton btn_Convert;
     private JPanel panelMain;
     private JTextField txtField_FilePath;
+    private JButton btn_Convert;
     private JButton btn_SelectFile;
 
-    String sourceFile = "";
-    String outputFile = "";
+    private String sourceFile = "";
+    private String outputFile = "";
 
     public FileConverter() {
         btn_Convert.addActionListener(new ActionListener() {
@@ -24,12 +24,12 @@ public class FileConverter {
                 if(!sourceFile.isEmpty()){
                     try{
                         ListToCSVParser text = new ListToCSVParser();
-                        JOptionPane.showMessageDialog(null, "Conversion Started");
+                        JOptionPane.showMessageDialog(null, "Press OK to start conversion");
                         text.ParseFile(sourceFile, outputFile);
                     }
                     catch(Exception x){
-                        JOptionPane.showMessageDialog(null, "Oops");
                         x.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Oops");
                     }
                 }else{
                     JOptionPane.showMessageDialog(null, "Select a file first");
@@ -65,7 +65,7 @@ public class FileConverter {
         JFrame frame = new JFrame("App");
         frame.setContentPane(new FileConverter().panelMain);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(720,480);
+        frame.setSize(480,240);
         frame.setVisible(true);
     }
 }
