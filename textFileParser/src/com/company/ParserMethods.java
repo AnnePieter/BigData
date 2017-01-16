@@ -4,6 +4,8 @@
 
 package com.company;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
@@ -11,9 +13,6 @@ public class ParserMethods {
 
     /** Method for converting movies.list */
     public String MoviesList(String line){
-        if(line.contains("SUSPENDED"))
-            return "";
-
         //Get movie (or serie) name
         String movieName = "";
         int end = line.lastIndexOf("\"");
@@ -67,6 +66,76 @@ public class ParserMethods {
             line = m.group(1) + ";" + m.group(2) + ";" + m.group(5) + ";";
             //line = line.replace("null","");
         }
+        return line;
+    }
+
+    /** Method for converting locations.list */
+    public String LocationsList(String line){
+        //Get movie (or serie) name
+        String movieName = "";
+        int end = line.indexOf("(");
+        if (end != -1) {
+            movieName = line.substring(0, end);
+            movieName = movieName.trim();
+
+            line = line.substring(end, line.length()).trim();
+        }
+
+        //Get release year
+        String releaseYear = "";
+        end = line.indexOf(")");
+        if (end != -1) {
+            releaseYear = line.substring(0, end + 1);
+            releaseYear = releaseYear.replace("(","").replace(")","").trim();
+
+            line = line.substring(end + 1, line.length()).trim();
+        }
+
+        //Get serie episode name (if found)
+        String episodeName = "";
+        end = line.indexOf("}");
+        if (end != -1){
+            episodeName = line.substring(0, end + 1);
+            episodeName = episodeName.replace("{","").replace("}","").trim();
+
+            line = line.substring(end + 1, line.length()).trim();
+        }
+
+        //Get locations and store them in an array
+        List<String> locations = new ArrayList<>();
+        while (line.contains(",")){
+            end = line.indexOf(",");
+            if (end != -1){
+                locations.add(line.substring(0, end + 1).replace(",","").trim());
+
+                line = line.substring(end + 1, line.length()).trim();
+            }
+
+        }
+
+        line = "";
+        for (int i = 0; i < locations.size(); i++){
+            //For the first item in locations
+            if (i == 0){
+                end = locations.get(i).indexOf(")");
+                if (end != -1) {
+                    locations.set(i, locations.get(i).substring(end + 1, locations.get(i).length()).trim());
+                }
+            }
+            //For the last item in locations
+            else if (i == locations.size() - 1){
+                end = locations.get(i).indexOf("(");
+                if (end != -1) {
+                    locations.set(i, locations.get(i).substring(end, locations.get(i).length()).trim());
+                }
+
+                line += movieName + ";" + locations.get(i) + ";" + releaseYear + ";" + episodeName + ";";
+            }
+            //For every other item in locations
+            else
+                line += movieName + ";" + locations.get(i) + ";" + releaseYear + ";" + episodeName + ";\n";
+        }
+
         return line;
     }
 

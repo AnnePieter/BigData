@@ -4,11 +4,14 @@
 
 package com.company;
 
+import javax.print.DocFlavor;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -24,6 +27,7 @@ public class FileConverter {
     private JTextField txtField_FilePath;
     private JButton btn_Convert;
     private JButton btn_SelectFile;
+    private JComboBox cBox_methods;
 
     private String sourceFile = "";
     private String outputFile = "";
@@ -71,6 +75,11 @@ public class FileConverter {
                 //}
             }
         });
+
+
+        String[] methodsArray = {"Movies", "Actors", "Countries", "Locations"};
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(methodsArray);
+        cBox_methods.setModel(model);
     }
 
     public static void main(String[] args) throws IOException{
@@ -85,6 +94,8 @@ public class FileConverter {
     public void ParseFile(String fileToConvert, String fileToConvertTo) throws IOException {
         progressBar.setString("Initializing");
         btn_Convert.setEnabled(false);
+
+        String method = cBox_methods.getSelectedItem().toString();
 
         Path sourceFile = Paths.get(fileToConvert);
         Path destinationFile = Paths.get(fileToConvertTo);
@@ -119,11 +130,17 @@ public class FileConverter {
                 if (line.contains("-----------------------------------------------------------------------------"))
                     break;
 
+
+                switch (method){
+                    case "Actors": line = parserMethods.ActorsList(line); break;
+                    case "Movies": line = parserMethods.MoviesList(line); break;
+                    case "Countries": line = parserMethods.CountriesList(line); break;
+                    case "Locations": line = parserMethods.LocationsList(line); break;
+                    default: break;
+                }
                 /* Available parser methods, needs improvement */
-                //line = parserMethods.MoviesList(line);
                 //line = parserMethods.MoviesListRegex(line, "^([\\s\\S]*)\\(([\\d{4}]*|\\?*)(?:\\/)?([\\w]*)?\\)(\\s*\\{([\\w!\\s:;\\/\\.\\-\\'\"?`_&@$%^*<>~+=\\|\\,\\(\\)]*)(\\s*\\(#([\\d]*)\\.([\\d]*)\\))?\\})?\\s*([\\d{4}]*)?(?:-)?([\\d{4}]*)?");
-                //line = parserMethods.CountriesList(line);
-                line = parserMethods.ActorsList(line);
+
 
                 if (line.isEmpty())
                     continue;
