@@ -110,30 +110,41 @@ public class ParserMethods {
 
                 line = line.substring(end + 1, line.length()).trim();
             }
+        }
+        //Get the last location (at the end of the string)
+        end = line.indexOf("(");
+        if (end != -1){
+            locations.add(line.substring(0, end).replace(",","").trim());
 
+            line = line.substring(end, line.length()).trim();
+        }
+        else{
+            locations.add(line.trim());
         }
 
-        line = "";
-        for (int i = 0; i < locations.size(); i++){
-            //For the first item in locations
-            if (i == 0){
+        line = movieName + ";" + releaseYear + ";" + episodeName + ";";
+
+        //Starting at the end of the array to get the last 3 locations
+        for (int i = locations.size() - 1; i > 0; i--){
+            //Only use the last 3 entries in locations (we don't need stage name etc.)
+            if (i == locations.size() - 4)
+                break;
+
+            if (i == locations.size() - 3){
                 end = locations.get(i).indexOf(")");
                 if (end != -1) {
                     locations.set(i, locations.get(i).substring(end + 1, locations.get(i).length()).trim());
                 }
             }
-            //For the last item in locations
-            else if (i == locations.size() - 1){
+            //For the last item in locations (first in loop)
+            else if (i == locations.size()){
                 end = locations.get(i).indexOf("(");
                 if (end != -1) {
                     locations.set(i, locations.get(i).substring(end, locations.get(i).length()).trim());
                 }
-
-                line += movieName + ";" + locations.get(i) + ";" + releaseYear + ";" + episodeName + ";";
             }
-            //For every other item in locations
-            else
-                line += movieName + ";" + locations.get(i) + ";" + releaseYear + ";" + episodeName + ";\n";
+
+            line += locations.get(i) + ";";
         }
 
         return line;
