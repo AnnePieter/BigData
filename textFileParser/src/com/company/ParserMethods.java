@@ -5,11 +5,34 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 public class ParserMethods {
+
+    // Persistent variables
+    String currentActor = "";
+    static final HashMap<Integer, String> monthNameNumber;
+    static {
+        monthNameNumber = new HashMap<>();
+        monthNameNumber.put(1, "january");
+        monthNameNumber.put(2, "february");
+        monthNameNumber.put(3, "march");
+        monthNameNumber.put(4, "april");
+        monthNameNumber.put(5, "may");
+        monthNameNumber.put(6, "june");
+        monthNameNumber.put(7, "july");
+        monthNameNumber.put(8, "august");
+        monthNameNumber.put(9, "september");
+        monthNameNumber.put(10, "october");
+        monthNameNumber.put(11, "november");
+        monthNameNumber.put(12, "december");
+    }
+
+
 
     /** Method for converting movies.list */
     public String MoviesList(String line){
@@ -150,7 +173,75 @@ public class ParserMethods {
         return line;
     }
 
-    String currentActor = "";
+    /** Method for converting Biographies.list */
+    public String BiographiesList(String line){
+        // This function only returns something when both 'NM:' and 'DB:' have been found
+        // Only interested in name (NM:) and birth-info (DB:)
+        if (!line.contains("NM:") && !line.contains("DB:"))
+            return "";
+
+        // For lines that contain the name
+        if (line.contains("NM:")){
+            //currentActor = line.substring(3, line.length());
+            if (line.contains("("))
+                currentActor = line.substring(3, line.indexOf("(") - 1);
+            else
+                currentActor = line.substring(3, line.length() - 1);
+
+        }
+
+        // For lines that contain the birth info
+        if (line.contains("DB:")){
+            String birthInfo = line.substring(3, line.length());
+            String country = "";
+            String date = "";
+            // DB: 26 August 1966, Santiago, Chile (example)
+            // Counting commas to get total items in birthInfo string (0 commas is 1 item etc.)
+            int commaCount = 0;
+            for(int i = 0; i < birthInfo.length(); i++){
+                if( birthInfo.charAt(i) == ',')
+                    commaCount++;
+            }
+
+            // Only interested in data and country (first and last item)
+            // With commaCount == 0 there is only 1 item, check if it's a date or a country
+            if (commaCount == 0){
+                // Check if it's a date
+                for (int i = 0; i < birthInfo.length(); i++){
+                    for (int number = 0; number < 10; number++){
+                        if (birthInfo.charAt(i) == number){
+                            date = birthInfo;
+                            break;
+                        }
+                        else if(number == 9)
+                            country = birthInfo;
+                    }
+                }
+            }
+            // With commaCount > 0 there is more than 1 item
+            else{
+                // Date is always first (if it is included)
+                date = birthInfo.substring(0, birthInfo.indexOf(","));
+                country = birthInfo.substring(birthInfo.lastIndexOf(",") + 1, birthInfo.length());
+            }
+
+            // Convert date to dd/MM/yyyy
+            if(!date.isEmpty()){
+                for (Map.Entry<Integer, String> month : monthNameNumber.entrySet()){
+                    String monthName = month.getValue();
+                    if (date.toLowerCase().contains(monthName)){
+                        date = date.toLowerCase().replace(monthName, month.getKey().toString());
+                        break;
+                    }
+                }
+                date = date.trim().replace(" ", "-");
+            }
+
+            return currentActor.trim() + ";" + country.trim() + ";" + date.trim() + ";";
+        }
+        return "";
+    }
+
     /** Method for converting actors.list */
     public String ActorsList(String line){
         //Check for actor
@@ -204,7 +295,7 @@ public class ParserMethods {
 
         line = currentActor + ";" + movieName + ";" + releaseYear + ";" + episodeName + ";" + actorRole + ";";
 
-        return line.trim();
+        return line;
     }
 
     /** Method for converting countries.list */

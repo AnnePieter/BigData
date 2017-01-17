@@ -77,7 +77,7 @@ public class FileConverter {
         });
 
 
-        String[] methodsArray = {"Movies", "Actors", "Countries", "Locations"};
+        String[] methodsArray = {"Actors", "Biographies", "Countries", "Locations", "Movies"};
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(methodsArray);
         cBox_methods.setModel(model);
     }
@@ -102,7 +102,7 @@ public class FileConverter {
 
         BufferedWriter writer = Files.newBufferedWriter(destinationFile,ENCODING);
 
-        final int totalLines = CountFileLines(fileToConvert);
+        final int totalLines = 0; //CountFileLines(fileToConvert);
 
         try (Scanner scanner = new Scanner(sourceFile, ENCODING.name())){
             int currentLine = 0;
@@ -127,7 +127,8 @@ public class FileConverter {
                 String line = scanner.nextLine();
                 if (line.isEmpty())
                     continue;
-                if (line.contains("-----------------------------------------------------------------------------"))
+                // Every file ends with the first statement, the second statement is an exception for the file biography (2 extra -)
+                if (line.contains("-----------------------------------------------------------------------------") && !line.contains("-------------------------------------------------------------------------------"))
                     break;
 
 
@@ -136,6 +137,7 @@ public class FileConverter {
                     case "Movies": line = parserMethods.MoviesList(line); break;
                     case "Countries": line = parserMethods.CountriesList(line); break;
                     case "Locations": line = parserMethods.LocationsList(line); break;
+                    case "Biographies": line = parserMethods.BiographiesList(line); break;
                     default: break;
                 }
                 /* Available parser methods, needs improvement */
@@ -148,7 +150,7 @@ public class FileConverter {
                 writer.write(line);
                 writer.newLine();
 
-                //log(line);
+                log(line);
             }
             scanner.close();
             writer.close();
