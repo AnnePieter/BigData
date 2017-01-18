@@ -15,22 +15,27 @@ public class ParserMethods {
 
     // Persistent variables
     String currentActor = "";
+    String currentMovie = "";
     static final HashMap<Integer, String> monthNameNumber;
     static {
         monthNameNumber = new HashMap<>();
-        monthNameNumber.put(01, "january");
-        monthNameNumber.put(02, "february");
-        monthNameNumber.put(03, "march");
-        monthNameNumber.put(04, "april");
-        monthNameNumber.put(05, "may");
-        monthNameNumber.put(06, "june");
-        monthNameNumber.put(07, "july");
-        monthNameNumber.put(08, "august");
-        monthNameNumber.put(09, "september");
+        monthNameNumber.put(1, "january");
+        monthNameNumber.put(2, "february");
+        monthNameNumber.put(3, "march");
+        monthNameNumber.put(4, "april");
+        monthNameNumber.put(5, "may");
+        monthNameNumber.put(6, "june");
+        monthNameNumber.put(7, "july");
+        monthNameNumber.put(8, "august");
+        monthNameNumber.put(9, "september");
         monthNameNumber.put(10, "october");
         monthNameNumber.put(11, "november");
         monthNameNumber.put(12, "december");
     }
+
+    // Persistent variables for business.list
+    String previousCountry = "";
+    String previousMovie = "";
 
 
 
@@ -185,12 +190,10 @@ public class ParserMethods {
 
         // For lines that contain the name
         if (line.contains("NM:")){
-            //currentActor = line.substring(3, line.length());
             if (line.contains("("))
                 currentActor = line.substring(3, line.indexOf("(") - 1);
             else
                 currentActor = line.substring(3, line.length() - 1);
-
         }
 
         // For lines that contain the birth info
@@ -301,34 +304,89 @@ public class ParserMethods {
         return line;
     }
 
+    /** Method for converting business.list */
+    public String BusinessList(String line){
+        // This function only returns something when MV(title) and (BT(budget) or GR(revenue)) have been been found
+        if (!line.contains("MV:") && !line.contains("BT:") && !line.contains("GR:"))
+            return "";
+
+        if (line.contains("MV:")){
+            if (line.contains("("))
+                currentMovie = line.substring(3, line.indexOf("(") - 1);
+            else
+                currentMovie = line.substring(3, line.length() - 1);
+        }
+
+        if (line.contains("GR:")){
+            String revenueData = line.substring(3, line.length() - 1).trim();
+
+            String currency = "";
+            String revenue = "";
+            String country = "";
+
+            // Get currency
+            currency = revenueData.substring(0, 3);
+            revenueData = revenueData.substring(3, revenueData.length());
+
+            // Get revenue
+            int end = revenueData.indexOf("(");
+            if (end != -1){
+                revenue = revenueData.substring(0, end);
+                revenueData = revenueData.substring(end + 1, revenueData.length());
+
+                // Get country
+                end = revenueData.indexOf(")");
+                if (end != -1){
+                    country = revenueData.substring(0, end);
+                }
+            } else
+                revenue = revenueData.substring(0, revenueData.length());
+
+            // Ignore entries that are the same except for revenue and date (old entries from idmb)
+            if (country.toLowerCase().equals(previousCountry.toLowerCase()) && currentMovie.toLowerCase().equals(previousMovie.toLowerCase())){ //als de country het zelfde is als de vorige skippen
+                previousCountry = country;
+                previousMovie = currentMovie;
+
+                return "";
+            } else {
+                previousCountry = country;
+                previousMovie = currentMovie;
+
+                return currentMovie.replace(",",";").trim() + "," + currency.trim() + "," + revenue.trim().replace(",",".") + "," + country.trim() + ",";
+            }
+        }
+        return "";
+    }
+
     /** Method for converting countries.list */
     public String CountriesList(String line){
-        line = line.replace(")}"    ,";");
+        line = line.replace(","     ,";");
+        line = line.replace(")}"    ,",");
         line = line.replace("(#"	,"#");
         line = line.replace("\""    ,"");
-        line = line.replace("("     ,";");
-        line = line.replace(")"     ,";");
+        line = line.replace("("     ,",");
+        line = line.replace(")"     ,",");
         line = line.replace("{"     ,"");
         line = line.replace("}}"    ,"");
-        line = line.replace("\t"    ,";");
+        line = line.replace("\t"    ,",");
 
         for(int i = 0; i < 10; i++)
         {
-            String repstr = ";;;;";
-            line = line.replace(repstr,";;;");
+            String repstr = ",,,,";
+            line = line.replace(repstr,",,,");
         }
 
         int count = 0;
         for(int x = 0; x < line.length(); x++)
         {
-            if(line.charAt(x) == ';')
+            if(line.charAt(x) == ',')
             {
                 count++;
             }
         }
 
         while(count > 3) {
-            line = line.replace(";;", ";");
+            line = line.replace(",,", ",");
             count--;
         }
 

@@ -75,7 +75,7 @@ public class FileConverter {
         });
 
 
-        String[] methodsArray = {"Actors", "Biographies", "Countries", "Locations", "Movies"};
+        String[] methodsArray = {"Actors", "Biographies", "Business", "Countries", "Locations", "Movies"};
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(methodsArray);
         cBox_methods.setModel(model);
     }
@@ -112,12 +112,13 @@ public class FileConverter {
 
                 String line = scanner.nextLine();
                 if (line.contains("LIST")){
-                    scanner.nextLine(); //skip an additional line
-                    break;
+                    line = scanner.nextLine();
+                    if (line.contains("======="))
+                        break;
                 }
             }
 
-            while (scanner.hasNextLine()){
+            scannerLoop: while (scanner.hasNextLine()){
                 currentLine++;
                 ProgressUpdate(currentLine, totalLines);
 
@@ -133,9 +134,20 @@ public class FileConverter {
                 switch (method){
                     case "Actors": line = parserMethods.ActorsList(line); break;
                     case "Movies": line = parserMethods.MoviesList(line); break;
-                    case "Countries": line = parserMethods.CountriesList(line); break;
+                    case "Countries":
+                        // This file has a different end line, jay for consistency imdb
+                        if (line.contains("--------------------------------------------------------------------------------"))
+                            break scannerLoop;
+                        else
+                            line = parserMethods.CountriesList(line); break;
                     case "Locations": line = parserMethods.LocationsList(line); break;
                     case "Biographies": line = parserMethods.BiographiesList(line); break;
+                    case "Business":
+                        // This file has a different end line, jay for consistency imdb
+                        if (line.contains("NOTES"))
+                            break scannerLoop;
+                        else
+                            line = parserMethods.BusinessList(line); break;
                     default: break;
                 }
 
