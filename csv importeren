@@ -1,0 +1,19 @@
+-- Gemaakt door Ruben Guit
+
+COPY ActorsCSV
+FROM { 'C:\Users\Ruben\Documents\actors.csv' | STDIN };
+
+COPY ActressesCSV
+FROM { 'C:\Users\Ruben\Documents\actresses.csv' | STDIN };
+
+COPY BiographiesCSV
+FROM { 'C:\Users\Ruben\Documents\biographies.csv' | STDIN };
+
+COPY CountriesCSV
+FROM { 'C:\Users\Ruben\Documents\countries.csv' | STDIN };
+
+COPY LocationsCSV
+FROM { 'C:\Users\Ruben\Documents\locations.csv' | STDIN };
+
+COPY MoviesCSV
+FROM { 'C:\Users\Ruben\Documents\movies.csv' | STDIN };

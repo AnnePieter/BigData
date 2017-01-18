@@ -1,0 +1,70 @@
+-- Gemaakt door Ruben Guit
+
+CREATE TABLE ActorsCSV(
+    actor varchar(100) NOT NULL,
+    movie_or_series varchar(100) NOT NULL,
+    release_year int,
+    episode_name varchar(100),
+    actor_role varchar (100)
+);
+
+CREATE TABLE ActressesCSV(
+    actor varchar(100) NOT NULL,
+    movie_or_series varchar(100) NOT NULL,
+    release_year int,
+    episode_name varchar(100),
+    actor_role varchar (100)
+);
+
+CREATE TABLE BiographiesCSV(
+    actor varchar (100) NOT NULL,
+    birth_country varchar (100),
+    birth_date date
+);
+
+CREATE TABLE CountriesCSV(
+    
+);
+
+CREATE TABLE LocationsCSV(
+    movie_or_series varchar(100) NOT NULL,
+    release_year int,
+    episode_name varchar(100),
+    country varchar(100),
+    province varchar(100)
+    city varchar(100)
+);
+
+CREATE TABLE MoviesCSV(
+    movie_or_series varchar(100) NOT NULL,
+    release_year int,
+    episode_name varchar(100),
+);
+
+
+CREATE TABLE Actors(
+    ActorID BIGSERIAL PRIMARY KEY NOT NULL,
+    actor varchar(100) NOT NULL,
+    birth_country varchar (100),
+    birth_date date,
+    gender varchar(10) NOT NULL,
+    country varchar(100)
+);
+
+CREATE TABLE Movies(
+    MovieID BIGSERIAL PRIMARY KEY NOT NULL,
+    movie_or_series varchar(100) NOT NULL,
+    release_year int NOT NULL,
+    country varchar(100),
+    BO_cinema int,
+    BO_foreign int,
+    production_costs int,
+    rating double,
+    movie_length int
+);
+
+CREATE TABLE ActorsMovies(
+    ActorID BIGINT NOT NULL references Actors(ActorID),
+    MovieID BIGINT NOT NULL references Movies(MovieID),
+    PRIMARY KEY (ActorID, MovieID)
+);
