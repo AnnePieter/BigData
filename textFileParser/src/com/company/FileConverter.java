@@ -71,8 +71,6 @@ public class FileConverter {
                     log(outputFile);
                     txtField_FilePath.setText(sourceFile);
                 }
-                //if (returnVal == JFileChooser.CANCEL_OPTION) {
-                //}
             }
         });
 
@@ -102,7 +100,7 @@ public class FileConverter {
 
         BufferedWriter writer = Files.newBufferedWriter(destinationFile,ENCODING);
 
-        final int totalLines = 0; //CountFileLines(fileToConvert);
+        final int totalLines = CountFileLines(fileToConvert);
 
         try (Scanner scanner = new Scanner(sourceFile, ENCODING.name())){
             int currentLine = 0;
@@ -140,9 +138,6 @@ public class FileConverter {
                     case "Biographies": line = parserMethods.BiographiesList(line); break;
                     default: break;
                 }
-                /* Available parser methods, needs improvement */
-                //line = parserMethods.MoviesListRegex(line, "^([\\s\\S]*)\\(([\\d{4}]*|\\?*)(?:\\/)?([\\w]*)?\\)(\\s*\\{([\\w!\\s:;\\/\\.\\-\\'\"?`_&@$%^*<>~+=\\|\\,\\(\\)]*)(\\s*\\(#([\\d]*)\\.([\\d]*)\\))?\\})?\\s*([\\d{4}]*)?(?:-)?([\\d{4}]*)?");
-
 
                 if (line.isEmpty())
                     continue;
@@ -150,7 +145,7 @@ public class FileConverter {
                 writer.write(line);
                 writer.newLine();
 
-                log(line);
+                //log(line);
             }
             scanner.close();
             writer.close();

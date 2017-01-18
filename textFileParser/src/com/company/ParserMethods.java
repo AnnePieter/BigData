@@ -18,15 +18,15 @@ public class ParserMethods {
     static final HashMap<Integer, String> monthNameNumber;
     static {
         monthNameNumber = new HashMap<>();
-        monthNameNumber.put(1, "january");
-        monthNameNumber.put(2, "february");
-        monthNameNumber.put(3, "march");
-        monthNameNumber.put(4, "april");
-        monthNameNumber.put(5, "may");
-        monthNameNumber.put(6, "june");
-        monthNameNumber.put(7, "july");
-        monthNameNumber.put(8, "august");
-        monthNameNumber.put(9, "september");
+        monthNameNumber.put(01, "january");
+        monthNameNumber.put(02, "february");
+        monthNameNumber.put(03, "march");
+        monthNameNumber.put(04, "april");
+        monthNameNumber.put(05, "may");
+        monthNameNumber.put(06, "june");
+        monthNameNumber.put(07, "july");
+        monthNameNumber.put(08, "august");
+        monthNameNumber.put(09, "september");
         monthNameNumber.put(10, "october");
         monthNameNumber.put(11, "november");
         monthNameNumber.put(12, "december");
@@ -47,10 +47,13 @@ public class ParserMethods {
         }
         else{
             end = line.indexOf("(");
-            movieName = line.substring(0, end);
-            movieName = movieName.trim();
+            if (end != -1){
+                movieName = line.substring(0, end);
+                movieName = movieName.trim();
 
-            line = line.substring(end, line.length()).trim();
+                line = line.substring(end, line.length()).trim();
+
+            }
         }
 
         //Get release year
@@ -73,7 +76,7 @@ public class ParserMethods {
             line = line.substring(end + 1, line.length()).trim();
         }
 
-        line = movieName + ";" + releaseYear + ";" + episodeInfo + ";";
+        line = movieName.replace(",",";") + "," + releaseYear + "," + episodeInfo.replace(",","") + ",";
 
         return line;
     }
@@ -145,7 +148,7 @@ public class ParserMethods {
             locations.add(line.trim());
         }
 
-        line = movieName + ";" + releaseYear + ";" + episodeName + ";";
+        line = movieName + "," + releaseYear + "," + episodeName + ",";
 
         //Starting at the end of the array to get the last 3 locations
         for (int i = locations.size() - 1; i > 0; i--){
@@ -167,7 +170,7 @@ public class ParserMethods {
                 }
             }
 
-            line += locations.get(i) + ";";
+            line += locations.get(i) + ",";
         }
 
         return line;
@@ -237,7 +240,7 @@ public class ParserMethods {
                 date = date.trim().replace(" ", "-");
             }
 
-            return currentActor.trim() + ";" + country.trim() + ";" + date.trim() + ";";
+            return currentActor.trim() + "," + country.trim() + "," + date.trim() + ",";
         }
         return "";
     }
@@ -293,7 +296,7 @@ public class ParserMethods {
             line = line.substring(end + 1, line.length()).trim();
         }
 
-        line = currentActor + ";" + movieName + ";" + releaseYear + ";" + episodeName + ";" + actorRole + ";";
+        line = currentActor + "," + movieName.replace(",","") + "," + releaseYear + "," + episodeName.replace(",","") + "," + actorRole + ",";
 
         return line;
     }
