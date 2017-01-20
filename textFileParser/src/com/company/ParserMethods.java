@@ -358,6 +358,48 @@ public class ParserMethods {
         return "";
     }
 
+    /** Method for converting ratings.list */
+    public String RatingsList(String line){
+        // Distribution  Votes  Rank  Title
+        // Only interested in Rank and Title
+
+        // If line does not start with an empty space there is no data we are interested in
+        if (!line.startsWith(" "))
+            return "";
+
+        String rank = "";
+        String title = "";
+
+        // Entries are divided by whitespaces, skip the first 2 entries
+        int skipEntries = 2;
+        int currentEntry = 1;
+        for (int i = 0; i < line.length(); i++){
+            // Entry found
+            if (line.charAt(i) != ' '){
+                // Skip entry
+                if (skipEntries > 0){
+                    while (line.charAt(i) != ' '){
+                        i++;
+                    }
+                    skipEntries--;
+                }
+                else{
+                    if (currentEntry == 3){
+                        rank = line.substring(i, line.indexOf(" ", i));
+                        while (line.charAt(i) != ' '){
+                            i++;
+                        }
+                    }
+                    else if (currentEntry == 4)
+                        title = line.substring(i, line.indexOf("("));
+                }
+                currentEntry++;
+            }
+        }
+
+        return rank.trim() + "," + title.replace(",",";").trim() + ",";
+    }
+
     /** Method for converting countries.list */
     public String CountriesList(String line){
         line = line.replace(","     ,";");

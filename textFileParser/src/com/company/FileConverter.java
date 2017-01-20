@@ -75,7 +75,7 @@ public class FileConverter {
         });
 
 
-        String[] methodsArray = {"Actors", "Biographies", "Business", "Countries", "Locations", "Movies"};
+        String[] methodsArray = {"Actors", "Biographies", "Business", "Countries", "Locations", "Movies", "Ratings"};
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(methodsArray);
         cBox_methods.setModel(model);
     }
@@ -116,6 +116,8 @@ public class FileConverter {
                     if (line.contains("======="))
                         break;
                 }
+                else if (line.contains("New  Distribution  Votes  Rank  Title"))
+                    break;
             }
 
             scannerLoop: while (scanner.hasNextLine()){
@@ -128,26 +130,22 @@ public class FileConverter {
                     continue;
                 // Every file ends with the first statement, the second statement is an exception for the file biography (2 extra -)
                 if (line.contains("-----------------------------------------------------------------------------") && !line.contains("-------------------------------------------------------------------------------"))
-                    break;
-
+                    break scannerLoop;
 
                 switch (method){
                     case "Actors": line = parserMethods.ActorsList(line); break;
                     case "Movies": line = parserMethods.MoviesList(line); break;
                     case "Countries":
-                        // This file has a different end line, jay for consistency imdb
-                        if (line.contains("--------------------------------------------------------------------------------"))
-                            break scannerLoop;
-                        else
-                            line = parserMethods.CountriesList(line); break;
+                        if (line.contains("--------------------------------------------------------------------------------")) break scannerLoop;
+                        else line = parserMethods.CountriesList(line); break;
                     case "Locations": line = parserMethods.LocationsList(line); break;
                     case "Biographies": line = parserMethods.BiographiesList(line); break;
                     case "Business":
-                        // This file has a different end line, jay for consistency imdb
-                        if (line.contains("NOTES"))
-                            break scannerLoop;
-                        else
-                            line = parserMethods.BusinessList(line); break;
+                        if (line.contains("NOTES")) break scannerLoop;
+                        else line = parserMethods.BusinessList(line); break;
+                    case "Ratings":
+                        if (line.contains("------------------------------------------------------------------------------")) break scannerLoop;
+                        else line = parserMethods.RatingsList(line); break;
                     default: break;
                 }
 
@@ -157,7 +155,7 @@ public class FileConverter {
                 writer.write(line);
                 writer.newLine();
 
-                //log(line);
+                log(line);
             }
             scanner.close();
             writer.close();
