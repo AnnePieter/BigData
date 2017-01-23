@@ -1,0 +1,21 @@
+-- Gemaakt door Ruben Guit
+
+set client_encoding to 'latin1';
+
+COPY ActorsCSV
+FROM 'E:\Downloads\IMDBlists\actors.list.csv' CSV;
+
+COPY ActressesCSV
+FROM 'C:\Users\Ruben\Documents\actresses.list.csv' CSV;
+
+COPY BiographiesCSV
+FROM 'C:\Users\Ruben\Documents\biographies.list.csv' CSV;
+
+COPY CountriesCSV
+FROM 'C:\Users\Ruben\Documents\countries.list.csv' CSV;
+
+COPY LocationsCSV
+FROM 'C:\Users\Ruben\Documents\locations.list.csv' CSV;
+
+COPY MoviesCSV
+FROM 'C:\Users\Ruben\Documents\movies.list.csv' CSV;

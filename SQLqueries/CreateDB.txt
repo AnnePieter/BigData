@@ -1,0 +1,12 @@
+-- Database: BigDataP2
+
+-- DROP DATABASE "BigDataP2";
+
+CREATE DATABASE "BigDataP2"
+    WITH 
+    OWNER = postgres
+    ENCODING = 'LATIN1'
+    LC_COLLATE = 'C'
+    LC_CTYPE = 'C'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
