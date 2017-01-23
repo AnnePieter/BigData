@@ -27,8 +27,8 @@
       <file leaf-file-name="FileConverter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/FileConverter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="133" column="0" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
+            <state relative-caret-position="144">
+              <caret line="102" column="35" selection-start-line="102" selection-start-column="35" selection-end-line="102" selection-end-column="35" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -62,14 +62,13 @@
       <file leaf-file-name="ParserMethods.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/ParserMethods.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="518">
-              <caret line="361" column="42" selection-start-line="361" selection-start-column="42" selection-end-line="361" selection-end-column="42" />
+            <state relative-caret-position="-28">
+              <caret line="124" column="60" selection-start-line="124" selection-start-column="60" selection-end-line="124" selection-end-column="60" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
                 <element signature="method#MoviesList#0;class#ParserMethods#0" expanded="false" />
                 <element signature="method#MoviesListRegex#0;class#ParserMethods#0" expanded="false" />
-                <element signature="method#LocationsList#0;class#ParserMethods#0" expanded="false" />
                 <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
                 <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
                 <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
@@ -147,9 +146,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -210,6 +208,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -515,17 +514,17 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875264" sideWeight="0.4359375" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875264" sideWeight="0.43385416" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19767442" sideWeight="0.575" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19767442" sideWeight="0.578125" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19767442" sideWeight="0.425" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19767442" sideWeight="0.421875" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -563,12 +562,6 @@
           <properties method="actionPerformed" />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/company/ParserMethods.java</url>
-          <line>252</line>
-          <properties />
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
       </breakpoints>
       <option name="time" value="8" />
     </breakpoint-manager>
@@ -601,7 +594,6 @@
             <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesListRegex#0;class#ParserMethods#0" expanded="false" />
-            <element signature="method#LocationsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
@@ -649,7 +641,6 @@
             <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesListRegex#0;class#ParserMethods#0" expanded="false" />
-            <element signature="method#LocationsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
@@ -689,7 +680,6 @@
             <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesListRegex#0;class#ParserMethods#0" expanded="false" />
-            <element signature="method#LocationsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
@@ -709,7 +699,6 @@
             <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesListRegex#0;class#ParserMethods#0" expanded="false" />
-            <element signature="method#LocationsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
@@ -729,7 +718,6 @@
             <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesListRegex#0;class#ParserMethods#0" expanded="false" />
-            <element signature="method#LocationsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
@@ -749,7 +737,6 @@
             <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesListRegex#0;class#ParserMethods#0" expanded="false" />
-            <element signature="method#LocationsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
@@ -769,7 +756,6 @@
             <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesListRegex#0;class#ParserMethods#0" expanded="false" />
-            <element signature="method#LocationsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
@@ -789,7 +775,6 @@
             <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesListRegex#0;class#ParserMethods#0" expanded="false" />
-            <element signature="method#LocationsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
@@ -809,7 +794,6 @@
             <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesListRegex#0;class#ParserMethods#0" expanded="false" />
-            <element signature="method#LocationsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
@@ -829,7 +813,6 @@
             <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesListRegex#0;class#ParserMethods#0" expanded="false" />
-            <element signature="method#LocationsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
@@ -849,7 +832,6 @@
             <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesListRegex#0;class#ParserMethods#0" expanded="false" />
-            <element signature="method#LocationsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
@@ -869,7 +851,6 @@
             <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesListRegex#0;class#ParserMethods#0" expanded="false" />
-            <element signature="method#LocationsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
@@ -889,7 +870,6 @@
             <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesListRegex#0;class#ParserMethods#0" expanded="false" />
-            <element signature="method#LocationsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
@@ -909,7 +889,6 @@
             <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesListRegex#0;class#ParserMethods#0" expanded="false" />
-            <element signature="method#LocationsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
@@ -929,7 +908,6 @@
             <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesListRegex#0;class#ParserMethods#0" expanded="false" />
-            <element signature="method#LocationsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
@@ -948,7 +926,6 @@
             <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesListRegex#0;class#ParserMethods#0" expanded="false" />
-            <element signature="method#LocationsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
@@ -969,7 +946,6 @@
             <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesListRegex#0;class#ParserMethods#0" expanded="false" />
-            <element signature="method#LocationsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
@@ -989,7 +965,6 @@
             <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesListRegex#0;class#ParserMethods#0" expanded="false" />
-            <element signature="method#LocationsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
@@ -1009,7 +984,6 @@
             <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesListRegex#0;class#ParserMethods#0" expanded="false" />
-            <element signature="method#LocationsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
@@ -1029,7 +1003,6 @@
             <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesListRegex#0;class#ParserMethods#0" expanded="false" />
-            <element signature="method#LocationsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
@@ -1058,20 +1031,20 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/FileConverter.form">
-      <provider editor-type-id="ui-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
+      <provider editor-type-id="ui-designer">
+        <state />
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/FileConverter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="133" column="0" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
+        <state relative-caret-position="144">
+          <caret line="102" column="35" selection-start-line="102" selection-start-column="35" selection-end-line="102" selection-end-column="35" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
@@ -1083,14 +1056,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/ParserMethods.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="361" column="42" selection-start-line="361" selection-start-column="42" selection-end-line="361" selection-end-column="42" />
+        <state relative-caret-position="-28">
+          <caret line="124" column="60" selection-start-line="124" selection-start-column="60" selection-end-line="124" selection-end-column="60" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#MoviesListRegex#0;class#ParserMethods#0" expanded="false" />
-            <element signature="method#LocationsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />

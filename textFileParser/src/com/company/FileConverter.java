@@ -100,7 +100,7 @@ public class FileConverter {
 
         BufferedWriter writer = Files.newBufferedWriter(destinationFile,ENCODING);
 
-        final int totalLines = CountFileLines(fileToConvert);
+        final int totalLines = 1;//CountFileLines(fileToConvert);
 
         try (Scanner scanner = new Scanner(sourceFile, ENCODING.name())){
             int currentLine = 0;

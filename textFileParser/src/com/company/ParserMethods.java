@@ -104,7 +104,7 @@ public class ParserMethods {
     public String LocationsList(String line){
         //Get movie (or serie) name
         String movieName = "";
-        int end = line.indexOf("(");
+        int end = line.indexOf(" (");
         if (end != -1) {
             movieName = line.substring(0, end);
             movieName = movieName.trim();
@@ -116,8 +116,14 @@ public class ParserMethods {
         String releaseYear = "";
         end = line.indexOf(")");
         if (end != -1) {
+
             releaseYear = line.substring(0, end + 1);
             releaseYear = releaseYear.replace("(","").replace(")","").trim();
+
+            int end2 = releaseYear.indexOf("/");
+            if (end2 != -1)
+                releaseYear = releaseYear.substring(0,end2);
+
 
             line = line.substring(end + 1, line.length()).trim();
         }
@@ -153,8 +159,9 @@ public class ParserMethods {
             locations.add(line.trim());
         }
 
-        line = movieName + "," + releaseYear + "," + episodeName + ",";
+        line = movieName.replace(",","") + "," + releaseYear + "," + episodeName.replace(",","") + ",";
 
+        int lol = 3;
         //Starting at the end of the array to get the last 3 locations
         for (int i = locations.size() - 1; i > 0; i--){
             //Only use the last 3 entries in locations (we don't need stage name etc.)
@@ -176,9 +183,12 @@ public class ParserMethods {
             }
 
             line += locations.get(i) + ",";
+            lol --;
         }
+        for (int i = 0; i < lol; i++)
+            line += ",";
 
-        return line;
+        return line.substring(0, line.length() -1);
     }
 
     /** Method for converting Biographies.list */
@@ -299,7 +309,17 @@ public class ParserMethods {
             line = line.substring(end + 1, line.length()).trim();
         }
 
-        line = currentActor + "," + movieName.replace(",","") + "," + releaseYear + "," + episodeName.replace(",","") + "," + actorRole + ",";
+        String surname = "";
+        String firstname = "";
+        end = currentActor.indexOf(",");
+        if (end != -1){
+            surname = currentActor.substring(0, end);
+            firstname = currentActor.substring(end + 1);
+        }
+        else
+            firstname = currentActor;
+
+        line = (firstname + " " + surname).trim() + "," + movieName.replace(",","") + "," + releaseYear + "," + episodeName.replace(",","") + "," + actorRole + ",";
 
         return line;
     }
