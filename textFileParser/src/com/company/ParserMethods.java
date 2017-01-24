@@ -273,6 +273,23 @@ public class ParserMethods {
         String movieName = "";
         int end = line.indexOf("(");
         if (end != -1) {
+            //Exception for movienames with ( ) in them
+            int end2 = -1;
+            if (!Character.isDigit(line.charAt(end + 1)) && !('?' == line.charAt(end + 1)))
+                end2 = line.indexOf("(", end + 1);
+
+            if (end2 != -1)
+                end = end2;
+
+            //Exception for moviename with (123) in them
+            end2 = line.indexOf(")",end);
+            if (end2 - end < 5 || line.substring(end, end2).contains(" ")){
+                end2 = line.indexOf("(", end2);
+                if (end2 != -1)
+                    end = end2;
+
+            }
+
             movieName = line.substring(0, end);
             movieName = movieName.trim();
 
@@ -284,9 +301,14 @@ public class ParserMethods {
         end = line.indexOf(")");
         if (end != -1) {
             releaseYear = line.substring(0, end + 1);
-            releaseYear = releaseYear.replace("(","").replace(")","").trim();
-
-            line = line.substring(end + 1, line.length()).trim();
+            releaseYear = releaseYear.replace("(","").replace(")","").replace("????","").trim();
+            int end2 = releaseYear.indexOf("/");
+            if (end2 != -1){
+                releaseYear = releaseYear.substring(0, end2);
+                line = line.substring(end2 + 1, line.length()).trim();
+            }
+            else
+                line = line.substring(end + 1, line.length()).trim();
         }
 
         //Get serie episode name (if found)
@@ -319,7 +341,7 @@ public class ParserMethods {
         else
             firstname = currentActor;
 
-        line = (firstname + " " + surname).trim() + "," + movieName.replace(",","") + "," + releaseYear + "," + episodeName.replace(",","") + "," + actorRole + ",";
+        line = (firstname + " " + surname).replace(",","").trim() + "," + movieName.replace(",","") + "," + releaseYear + "," + episodeName.replace(",","") + "," + actorRole.replace(",","");
 
         return line;
     }

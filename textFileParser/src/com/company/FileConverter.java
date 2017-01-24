@@ -106,18 +106,43 @@ public class FileConverter {
             int currentLine = 0;
 
             //skip file documentation
-            while (scanner.hasNextLine()){
+            preScannerLoop: while (scanner.hasNextLine()){
                 currentLine++;
                 ProgressUpdate(currentLine, totalLines);
 
                 String line = scanner.nextLine();
-                if (line.contains("LIST")){
+
+                switch (method){
+                    case "Actors":
+                        if (line.contains("Name			Titles") && scanner.nextLine().contains("----\t\t\t------"))  break preScannerLoop;
+                        break;
+                    case "Movies":
+                        if (line.contains("Name			Titles"))  break preScannerLoop;
+                        break;
+                    case "Countries":
+                        if (line.contains("Name			Titles"))  break preScannerLoop;
+                        break;
+                    case "Locations":
+                        if (line.contains("Name			Titles"))  break preScannerLoop;
+                        break;
+                    case "Biographies":
+                        if (line.contains("Name			Titles"))  break preScannerLoop;
+                        break;
+                    case "Business":
+                        if (line.contains("Name			Titles"))  break preScannerLoop;
+                        break;
+                    case "Ratings":
+                        if (line.contains("Name			Titles"))  break preScannerLoop;
+                        break;
+                    default: break;
+                }
+                /*if (line.contains("LIST")){
                     line = scanner.nextLine();
                     if (line.contains("======="))
                         break;
                 }
                 else if (line.contains("New  Distribution  Votes  Rank  Title"))
-                    break;
+                    break;*/
             }
 
             scannerLoop: while (scanner.hasNextLine()){
@@ -155,7 +180,7 @@ public class FileConverter {
                 writer.write(line);
                 writer.newLine();
 
-                log(line);
+                // log(line);
             }
             scanner.close();
             writer.close();
