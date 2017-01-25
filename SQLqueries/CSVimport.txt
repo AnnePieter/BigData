@@ -2,11 +2,11 @@
 
 set client_encoding to 'latin1';
 
-COPY ActorsCSV
-FROM 'E:\Downloads\IMDBlists\actors.list.csv' CSV;
+COPY ActorsCSV (actor,movie_or_series,release_year,episode_name,actor_role)
+FROM 'D:\Downloads\actors.list\actors.list.csv' DELIMITER ',' CSV;
 
-COPY ActressesCSV
-FROM 'C:\Users\Ruben\Documents\actresses.list.csv' CSV;
+COPY BusinessCSV (movie_or_series,currency,revenue,country)
+FROM 'D:\Downloads\business.list\business.list.csv' DELIMITER ',' CSV;
 
 COPY BiographiesCSV
 FROM 'C:\Users\Ruben\Documents\biographies.list.csv' CSV;

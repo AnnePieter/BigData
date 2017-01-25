@@ -37,8 +37,6 @@ public class ParserMethods {
     String previousCountry = "";
     String previousMovie = "";
 
-
-
     /** Method for converting movies.list */
     public String MoviesList(String line){
         //Get movie (or serie) name
@@ -378,17 +376,22 @@ public class ParserMethods {
     /** Method for converting business.list */
     public String BusinessList(String line){
         // This function only returns something when MV(title) and (BT(budget) or GR(revenue)) have been been found
-        if (!line.contains("MV:") && !line.contains("BT:") && !line.contains("GR:"))
+        if (!line.startsWith("MV:") && !line.startsWith("GR:"))
             return "";
 
-        if (line.contains("MV:")){
-            if (line.contains("("))
-                currentMovie = line.substring(3, line.indexOf("(") - 1);
+        if (line.startsWith("MV:")){
+            if (line.contains("(")){
+                int end = line.lastIndexOf("(");
+                //if (!Character.isDigit(line.charAt(end + 1)))
+               //if (end - 1 >= 0)
+
+                currentMovie = line.substring(3, end);
+            }
             else
-                currentMovie = line.substring(3, line.length() - 1);
+                currentMovie = line.substring(3);
         }
 
-        if (line.contains("GR:")){
+        if (line.startsWith("GR:")){
             String revenueData = line.substring(3, line.length() - 1).trim();
 
             String currency = "";
@@ -423,7 +426,7 @@ public class ParserMethods {
                 previousCountry = country;
                 previousMovie = currentMovie;
 
-                return currentMovie.replace(",",";").trim() + "," + currency.trim() + "," + revenue.trim().replace(",",".") + "," + country.trim() + ",";
+                return currentMovie.replace(",",";").trim() + "," + currency.trim() + "," + revenue.replace(",","").trim() + "," + country.trim();
             }
         }
         return "";

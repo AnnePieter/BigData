@@ -114,26 +114,19 @@ public class FileConverter {
 
                 switch (method){
                     case "Actors":
-                        if (line.contains("Name			Titles") && scanner.nextLine().contains("----\t\t\t------"))  break preScannerLoop;
-                        break;
+                        if (line.contains("Name			Titles") && scanner.nextLine().contains("----\t\t\t------"))  break preScannerLoop; break;
                     case "Movies":
-                        if (line.contains("Name			Titles"))  break preScannerLoop;
-                        break;
+                        if (line.contains("LIST") && scanner.nextLine().contains("======="))  break preScannerLoop; break;
                     case "Countries":
-                        if (line.contains("Name			Titles"))  break preScannerLoop;
-                        break;
+                        if (line.contains("Name			Titles"))  break preScannerLoop;  break;
                     case "Locations":
-                        if (line.contains("Name			Titles"))  break preScannerLoop;
-                        break;
+                        if (line.contains("LIST") && scanner.nextLine().contains("======="))  break preScannerLoop; break;
                     case "Biographies":
-                        if (line.contains("Name			Titles"))  break preScannerLoop;
-                        break;
+                        if (line.contains("LIST") && scanner.nextLine().contains("======="))  break preScannerLoop; break;
                     case "Business":
-                        if (line.contains("Name			Titles"))  break preScannerLoop;
-                        break;
+                        if (line.contains("LIST") && scanner.nextLine().contains("======="))  break preScannerLoop; break;
                     case "Ratings":
-                        if (line.contains("Name			Titles"))  break preScannerLoop;
-                        break;
+                        if (line.contains("LIST") && scanner.nextLine().contains("======="))  break preScannerLoop;  break;
                     default: break;
                 }
                 /*if (line.contains("LIST")){
