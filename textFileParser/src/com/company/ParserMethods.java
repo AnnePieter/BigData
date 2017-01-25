@@ -260,34 +260,54 @@ public class ParserMethods {
 
     /** Method for converting actors.list */
     public String ActorsList(String line){
+        String surname = "";
+        String firstname = "";
+        String movieName = "";
+        int end = -1;
+        int end2 = -1;
         //Check for actor
         if (!(line.startsWith("\t"))){
-            int end = line.indexOf("\t");
+            end = line.indexOf("\t");
             currentActor = line.substring(0, end + 1);
             currentActor = currentActor.trim();
 
             line = line.substring(end, line.length()).trim();
         }
 
+        end = currentActor.indexOf(",");
+        if (end != -1){
+            surname = currentActor.substring(0, end);
+            firstname = currentActor.substring(end + 1);
+        }
+        else
+            firstname = currentActor;
+
+        //Exception for (((Resonancia))) (only 2 occurrences in actors)
+        if (line.contains("(((Resonancia)))"))
+            return (firstname + " " + surname).replace(",","").trim() + "," + "Resonancia" + "," + "," + ",";
+
         //Get movie (or serie) name
-        String movieName = "";
-        int end = line.indexOf("(");
+        end = line.indexOf("(");
         if (end != -1) {
-            //Exception for movienames with ( ) in them
-            int end2 = -1;
-            if (!Character.isDigit(line.charAt(end + 1)) && !('?' == line.charAt(end + 1)))
-                end2 = line.indexOf("(", end + 1);
 
-            if (end2 != -1)
-                end = end2;
+            int maxLoops = 5;
+            // Loop till we have a valid year value (max 5 loops)
+            while (maxLoops > 0){
+                end2 = line.indexOf(")",end + 1);
 
-            //Exception for moviename with (123) in them
-            end2 = line.indexOf(")",end);
-            if (end2 - end < 5 || line.substring(end, end2).contains(" ")){
-                end2 = line.indexOf("(", end2);
+                // If it could be a year value
+                if (end2 - end >= 5 && !line.substring(end, end2).contains(" ") && !line.substring(end, end2).contains("\'")){
+                    if ((Character.isDigit(line.charAt(end + 1)) && Character.isDigit(line.charAt(end + 2)) && Character.isDigit(line.charAt(end + 3)) && Character.isDigit(line.charAt(end + 4))) || ('?' == line.charAt(end + 1))){
+                        break;
+                    }
+                }
+
                 if (end2 != -1)
                     end = end2;
+                else
+                    break;
 
+                maxLoops--;
             }
 
             movieName = line.substring(0, end);
@@ -302,13 +322,23 @@ public class ParserMethods {
         if (end != -1) {
             releaseYear = line.substring(0, end + 1);
             releaseYear = releaseYear.replace("(","").replace(")","").replace("????","").trim();
-            int end2 = releaseYear.indexOf("/");
+            end2 = releaseYear.indexOf("/");
             if (end2 != -1){
                 releaseYear = releaseYear.substring(0, end2);
                 line = line.substring(end2 + 1, line.length()).trim();
             }
             else
                 line = line.substring(end + 1, line.length()).trim();
+
+            end2 = releaseYear.indexOf("-");
+            if (end2 != -1)
+                releaseYear = releaseYear.substring(end2 + 1);
+
+            try{
+                Integer.parseInt(releaseYear);
+            } catch (Exception e){
+                releaseYear = "";
+            }
         }
 
         //Get serie episode name (if found)
@@ -331,19 +361,18 @@ public class ParserMethods {
             line = line.substring(end + 1, line.length()).trim();
         }
 
-        String surname = "";
-        String firstname = "";
-        end = currentActor.indexOf(",");
-        if (end != -1){
-            surname = currentActor.substring(0, end);
-            firstname = currentActor.substring(end + 1);
+        line = (firstname + " " + surname).replace(",","").replace("\"","").replace("\'","").trim() + "," + movieName.replace(",","").replace("\"","").replace("\'","") + "," + releaseYear + "," + episodeName.replace(",","").replace("\"","") + "," + actorRole.replace("`","").replace("\"","").replace(",","");
+
+        // Sanity checks to avoid query errors
+        int count = 0;
+        for (int i = 0; i < line.length(); i++){
+            if (line.charAt(i) == ',')
+                count++;
         }
+        if (count == 4)
+            return line;
         else
-            firstname = currentActor;
-
-        line = (firstname + " " + surname).replace(",","").trim() + "," + movieName.replace(",","") + "," + releaseYear + "," + episodeName.replace(",","") + "," + actorRole.replace(",","");
-
-        return line;
+            return "";
     }
 
     /** Method for converting business.list */
