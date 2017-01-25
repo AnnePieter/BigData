@@ -126,16 +126,9 @@ public class FileConverter {
                     case "Business":
                         if (line.contains("LIST") && scanner.nextLine().contains("======="))  break preScannerLoop; break;
                     case "Ratings":
-                        if (line.contains("LIST") && scanner.nextLine().contains("======="))  break preScannerLoop;  break;
+                        if (line.contains("New  Distribution  Votes  Rank  Title"))  break preScannerLoop;  break;
                     default: break;
                 }
-                /*if (line.contains("LIST")){
-                    line = scanner.nextLine();
-                    if (line.contains("======="))
-                        break;
-                }
-                else if (line.contains("New  Distribution  Votes  Rank  Title"))
-                    break;*/
             }
 
             scannerLoop: while (scanner.hasNextLine()){

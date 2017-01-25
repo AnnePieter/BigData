@@ -8,6 +8,9 @@ FROM 'D:\Downloads\actors.list\actors.list.csv' DELIMITER ',' CSV;
 COPY BusinessCSV (movie_or_series,currency,revenue,country)
 FROM 'D:\Downloads\business.list\business.list.csv' DELIMITER ',' CSV;
 
+COPY RatingsCSV (score,movie_or_series)
+FROM 'D:\Downloads\ratings.list\ratings.list.csv' DELIMITER ',' CSV;
+
 COPY BiographiesCSV
 FROM 'C:\Users\Ruben\Documents\biographies.list.csv' CSV;
 

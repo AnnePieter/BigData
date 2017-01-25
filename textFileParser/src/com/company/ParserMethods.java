@@ -471,7 +471,7 @@ public class ParserMethods {
             }
         }
 
-        return rank.trim() + "," + title.replace(",",";").trim() + ",";
+        return rank.trim() + "," + title.replace(",",";").trim();
     }
 
     /** Method for converting countries.list */
