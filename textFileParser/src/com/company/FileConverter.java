@@ -100,25 +100,24 @@ public class FileConverter {
 
         BufferedWriter writer = Files.newBufferedWriter(destinationFile,ENCODING);
 
-        final int totalLines = 1;//CountFileLines(fileToConvert);
-
         try (Scanner scanner = new Scanner(sourceFile, ENCODING.name())){
             int currentLine = 0;
 
             //skip file documentation
             preScannerLoop: while (scanner.hasNextLine()){
                 currentLine++;
-                ProgressUpdate(currentLine, totalLines);
+                ProgressUpdate(currentLine);
 
                 String line = scanner.nextLine();
 
+                // Check if the first line of data is reached (differs from file to file)
                 switch (method){
                     case "Actors":
                         if (line.contains("Name			Titles") && scanner.nextLine().contains("----\t\t\t------"))  break preScannerLoop; break;
                     case "Movies":
                         if (line.contains("LIST") && scanner.nextLine().contains("======="))  break preScannerLoop; break;
                     case "Countries":
-                        if (line.contains("Name			Titles"))  break preScannerLoop;  break;
+                        if (line.contains("LIST") && scanner.nextLine().contains("======="))  break preScannerLoop;  break;
                     case "Locations":
                         if (line.contains("LIST") && scanner.nextLine().contains("======="))  break preScannerLoop; break;
                     case "Biographies":
@@ -133,23 +132,27 @@ public class FileConverter {
 
             scannerLoop: while (scanner.hasNextLine()){
                 currentLine++;
-                ProgressUpdate(currentLine, totalLines);
+                ProgressUpdate(currentLine);
 
                 //process each line
                 String line = scanner.nextLine();
                 if (line.isEmpty())
                     continue;
-                // Every file ends with the first statement, the second statement is an exception for the file biography (2 extra -)
-                if (line.contains("-----------------------------------------------------------------------------") && !line.contains("-------------------------------------------------------------------------------"))
-                    break scannerLoop;
 
+                // Check if the last line of data is reached (differs from file to file) (some files don't have end lines)
                 switch (method){
-                    case "Actors": line = parserMethods.ActorsList(line); break;
-                    case "Movies": line = parserMethods.MoviesList(line); break;
+                    case "Actors":
+                        if (line.contains("-----------------------------------------------------------------------------")) break scannerLoop;
+                        else line = parserMethods.ActorsList(line); break;
+                    case "Movies":
+                        if (line.contains("-----------------------------------------------------------------------------")) break scannerLoop;
+                        else line = parserMethods.MoviesList(line); break;
                     case "Countries":
                         if (line.contains("--------------------------------------------------------------------------------")) break scannerLoop;
                         else line = parserMethods.CountriesList(line); break;
-                    case "Locations": line = parserMethods.LocationsList(line); break;
+                    case "Locations":
+                        if (line.contains("-----------------------------------------------------------------------------")) break scannerLoop;
+                        else line = parserMethods.LocationsList(line); break;
                     case "Biographies": line = parserMethods.BiographiesList(line); break;
                     case "Business":
                         if (line.contains("NOTES")) break scannerLoop;
@@ -172,34 +175,19 @@ public class FileConverter {
             writer.close();
 
             btn_Convert.setEnabled(true);
-            ProgressUpdate(1,1);//Set progress bar to 100%
+            ProgressUpdate(-1);//Set progress bar to completed
         }
     }
 
     /** Updates the progress bar with the percentage of 'currentLine / totalLines' */
-    public void ProgressUpdate(final int currentLine, final int totalLines) {
+    public void ProgressUpdate(final int currentLine) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                double percent = (double) currentLine / (double) totalLines * 100.0;
-                progressBar.setString(String.valueOf((int)percent) + "%");
-                progressBar.setValue((int)percent);
+                progressBar.setString(currentLine + " - Lines processed.");
+                if (currentLine == -1)
+                    progressBar.setString("Completed without errors.");
             }
         });
-    }
-
-    /** Counts the number of lines in the file needed for the progress bar */
-    public static int CountFileLines(String fileToCount) throws IOException {
-        int count = 0;
-        Path sourceFile = Paths.get(fileToCount);
-
-        try (Scanner scanner = new Scanner(sourceFile, ENCODING.name())){
-            while (scanner.hasNextLine()){
-                scanner.nextLine();
-                count++;
-            }
-            scanner.close();
-        }
-        return count;
     }
 
     /** Prints a string from a object in the console */

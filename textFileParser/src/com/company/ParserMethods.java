@@ -55,7 +55,6 @@ public class ParserMethods {
                 movieName = movieName.trim();
 
                 line = line.substring(end, line.length()).trim();
-
             }
         }
 
@@ -217,27 +216,38 @@ public class ParserMethods {
                     commaCount++;
             }
 
-            // Only interested in data and country (first and last item)
+            // Only interested in date and country (first and last item)
             // With commaCount == 0 there is only 1 item, check if it's a date or a country
             if (commaCount == 0){
                 // Check if it's a date
-                for (int i = 0; i < birthInfo.length(); i++){
-                    for (int number = 0; number < 10; number++){
-                        if (birthInfo.charAt(i) == number){
-                            date = birthInfo;
-                            break;
-                        }
-                        else if(number == 9)
-                            country = birthInfo;
+                if (birthInfo.length() > 4){
+                    if (isNumeric(birthInfo.substring(birthInfo.length() - 4))){
+                        date = birthInfo;
                     }
                 }
+                //if no date was found
+                if (date.isEmpty())
+                    country = birthInfo;
             }
             // With commaCount > 0 there is more than 1 item
             else{
                 // Date is always first (if it is included)
                 date = birthInfo.substring(0, birthInfo.indexOf(","));
                 country = birthInfo.substring(birthInfo.lastIndexOf(",") + 1, birthInfo.length());
+
+                // check if date is actually a valid date
+                if (!isNumeric(date.substring(date.length() - 4))){
+                    date = "";
+                }
             }
+
+            // Exception for DB: c. 1936
+            if (line.contains("."))
+                date = date.substring(date.indexOf(".") + 1);
+
+            // Exception for 'DB: circa 1938'
+            if (date.contains("circa"))
+                date = date.substring(date.indexOf("circa") + 5);
 
             // Convert date to dd/MM/yyyy
             if(!date.isEmpty()){
@@ -249,9 +259,29 @@ public class ParserMethods {
                     }
                 }
                 date = date.trim().replace(" ", "-");
+                // Count (-), must be 2
+                int dashIndex = date.indexOf("-");
+                if (dashIndex != -1){
+                    dashIndex = date.indexOf("-", dashIndex + 1);
+                    if (dashIndex == -1)
+                        date = "1-" + date.trim();
+                }
+                else
+                    date = "1-1-" + date.trim();
+
             }
 
-            return currentActor.trim() + "," + country.trim() + "," + date.trim() + ",";
+            String surname = "";
+            String forename = "";
+            int end = currentActor.indexOf(",");
+            if (end != -1){
+                surname = currentActor.substring(0, end).trim();
+                forename = currentActor.substring(end + 1).trim();
+            }
+            else
+                forename = currentActor.trim();
+
+            return (forename + " " + surname).replace(",","").replace("\"","").replace("\'","").trim() + "," + country.replace("]","").replace("[","").trim() + "," + date.trim();
         }
         return "";
     }
@@ -259,30 +289,29 @@ public class ParserMethods {
     /** Method for converting actors.list */
     public String ActorsList(String line){
         String surname = "";
-        String firstname = "";
+        String forename = "";
         String movieName = "";
         int end = -1;
         int end2 = -1;
         //Check for actor
         if (!(line.startsWith("\t"))){
             end = line.indexOf("\t");
-            currentActor = line.substring(0, end + 1);
-            currentActor = currentActor.trim();
+            currentActor = line.substring(0, end + 1).trim();
 
             line = line.substring(end, line.length()).trim();
         }
 
         end = currentActor.indexOf(",");
         if (end != -1){
-            surname = currentActor.substring(0, end);
-            firstname = currentActor.substring(end + 1);
+            surname = currentActor.substring(0, end).trim();
+            forename = currentActor.substring(end + 1).trim();
         }
         else
-            firstname = currentActor;
+            forename = currentActor.trim();
 
         //Exception for (((Resonancia))) (only 2 occurrences in actors)
         if (line.contains("(((Resonancia)))"))
-            return (firstname + " " + surname).replace(",","").trim() + "," + "Resonancia" + "," + "," + ",";
+            return (forename + " " + surname).replace(",","").trim() + "," + "Resonancia" + "," + "," + ",";
 
         //Get movie (or serie) name
         end = line.indexOf("(");
@@ -295,11 +324,9 @@ public class ParserMethods {
 
                 // If it could be a year value
                 if (end2 - end >= 5 && !line.substring(end, end2).contains(" ") && !line.substring(end, end2).contains("\'")){
-                    if ((Character.isDigit(line.charAt(end + 1)) && Character.isDigit(line.charAt(end + 2)) && Character.isDigit(line.charAt(end + 3)) && Character.isDigit(line.charAt(end + 4))) || ('?' == line.charAt(end + 1))){
+                    if (isNumeric(line.substring(end + 1, end + 5)) || ('?' == line.charAt(end + 1)))
                         break;
-                    }
                 }
-
                 if (end2 != -1)
                     end = end2;
                 else
@@ -307,7 +334,6 @@ public class ParserMethods {
 
                 maxLoops--;
             }
-
             movieName = line.substring(0, end);
             movieName = movieName.trim();
 
@@ -359,7 +385,7 @@ public class ParserMethods {
             line = line.substring(end + 1, line.length()).trim();
         }
 
-        line = (firstname + " " + surname).replace(",","").replace("\"","").replace("\'","").trim() + "," + movieName.replace(",","").replace("\"","").replace("\'","") + "," + releaseYear + "," + episodeName.replace(",","").replace("\"","") + "," + actorRole.replace("`","").replace("\"","").replace(",","");
+        line = (forename + " " + surname).replace(",","").replace("\"","").replace("\'","").trim() + "," + movieName.replace(",","").replace("\"","").replace("\'","") + "," + releaseYear + "," + episodeName.replace(",","").replace("\"","") + "," + actorRole.replace("`","").replace("\"","").replace(",","");
 
         // Sanity checks to avoid query errors
         int count = 0;
@@ -509,4 +535,13 @@ public class ParserMethods {
         return line;
     }
 
+    /** Method for checking if a string consists only of integers */
+    public static boolean isNumeric(String str)
+    {
+        for (char c : str.toCharArray())
+        {
+            if (!Character.isDigit(c)) return false;
+        }
+        return true;
+    }
 } 

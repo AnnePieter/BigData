@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/com/company/FileConverter.java" line="127" />
+    <bookmark url="file://$PROJECT_DIR$/src/com/company/FileConverter.java" line="126" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee74f491-5555-446c-a147-2fca9aa5e134" name="Default" comment="" />
@@ -27,8 +27,8 @@
       <file leaf-file-name="FileConverter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/company/FileConverter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="130" column="17" selection-start-line="130" selection-start-column="17" selection-end-line="130" selection-end-column="17" />
+            <state relative-caret-position="323">
+              <caret line="39" column="21" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -62,8 +62,8 @@
       <file leaf-file-name="ParserMethods.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/company/ParserMethods.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="602">
-              <caret line="473" column="64" selection-start-line="473" selection-start-column="64" selection-end-line="473" selection-end-column="64" />
+            <state relative-caret-position="510">
+              <caret line="461" column="17" selection-start-line="461" selection-start-column="17" selection-end-line="461" selection-end-column="17" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
@@ -73,7 +73,9 @@
                 <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
                 <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
                 <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
+                <element signature="method#RatingsList#0;class#ParserMethods#0" expanded="false" />
                 <element signature="method#CountriesList#0;class#ParserMethods#0" expanded="false" />
+                <element signature="method#isNumeric#0;class#ParserMethods#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -103,8 +105,8 @@
         <option value="$PROJECT_DIR$/src/com/company/Parser.java" />
         <option value="$PROJECT_DIR$/src/com/company/ListToCSVParser.java" />
         <option value="$PROJECT_DIR$/src/com/company/FileConverter.form" />
-        <option value="$PROJECT_DIR$/src/com/company/FileConverter.java" />
         <option value="$PROJECT_DIR$/src/com/company/ParserMethods.java" />
+        <option value="$PROJECT_DIR$/src/com/company/FileConverter.java" />
       </list>
     </option>
   </component>
@@ -146,8 +148,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -514,16 +516,16 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875264" sideWeight="0.4296875" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875264" sideWeight="0.42447916" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15221988" sideWeight="0.5859375" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15221988" sideWeight="0.590625" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15221988" sideWeight="0.4140625" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15221988" sideWeight="0.409375" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -563,7 +565,7 @@
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="8" />
+      <option name="time" value="11" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -598,7 +600,9 @@
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#RatingsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#CountriesList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#isNumeric#0;class#ParserMethods#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -645,7 +649,9 @@
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#RatingsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#CountriesList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#isNumeric#0;class#ParserMethods#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -684,7 +690,9 @@
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#RatingsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#CountriesList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#isNumeric#0;class#ParserMethods#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -703,7 +711,9 @@
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#RatingsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#CountriesList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#isNumeric#0;class#ParserMethods#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -722,7 +732,9 @@
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#RatingsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#CountriesList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#isNumeric#0;class#ParserMethods#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -741,7 +753,9 @@
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#RatingsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#CountriesList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#isNumeric#0;class#ParserMethods#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -760,7 +774,9 @@
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#RatingsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#CountriesList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#isNumeric#0;class#ParserMethods#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -779,7 +795,9 @@
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#RatingsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#CountriesList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#isNumeric#0;class#ParserMethods#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -798,7 +816,9 @@
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#RatingsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#CountriesList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#isNumeric#0;class#ParserMethods#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -817,7 +837,9 @@
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#RatingsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#CountriesList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#isNumeric#0;class#ParserMethods#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -836,7 +858,9 @@
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#RatingsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#CountriesList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#isNumeric#0;class#ParserMethods#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -855,7 +879,9 @@
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#RatingsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#CountriesList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#isNumeric#0;class#ParserMethods#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -874,7 +900,9 @@
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#RatingsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#CountriesList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#isNumeric#0;class#ParserMethods#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -893,7 +921,9 @@
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#RatingsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#CountriesList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#isNumeric#0;class#ParserMethods#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -912,7 +942,9 @@
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#RatingsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#CountriesList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#isNumeric#0;class#ParserMethods#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -930,7 +962,9 @@
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#RatingsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#CountriesList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#isNumeric#0;class#ParserMethods#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -950,7 +984,9 @@
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#RatingsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#CountriesList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#isNumeric#0;class#ParserMethods#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -969,7 +1005,9 @@
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#RatingsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#CountriesList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#isNumeric#0;class#ParserMethods#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -988,7 +1026,9 @@
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#RatingsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#CountriesList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#isNumeric#0;class#ParserMethods#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1007,7 +1047,9 @@
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#RatingsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#CountriesList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#isNumeric#0;class#ParserMethods#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1043,8 +1085,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/FileConverter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="130" column="17" selection-start-line="130" selection-start-column="17" selection-end-line="130" selection-end-column="17" />
+        <state relative-caret-position="323">
+          <caret line="39" column="21" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
@@ -1056,8 +1098,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/company/ParserMethods.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="602">
-          <caret line="473" column="64" selection-start-line="473" selection-start-column="64" selection-end-line="473" selection-end-column="64" />
+        <state relative-caret-position="510">
+          <caret line="461" column="17" selection-start-line="461" selection-start-column="17" selection-end-line="461" selection-end-column="17" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="initializer##0;class#ParserMethods#0" expanded="false" />
@@ -1067,7 +1109,9 @@
             <element signature="method#BiographiesList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#ActorsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#BusinessList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#RatingsList#0;class#ParserMethods#0" expanded="false" />
             <element signature="method#CountriesList#0;class#ParserMethods#0" expanded="false" />
+            <element signature="method#isNumeric#0;class#ParserMethods#0" expanded="false" />
           </folding>
         </state>
       </provider>
