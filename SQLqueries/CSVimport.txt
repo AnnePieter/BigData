@@ -17,11 +17,5 @@ FROM 'D:\Downloads\biographies.list\biographies.list.csv' DELIMITER ',' CSV;
 COPY RatingsCSV (score,movie_or_series)
 FROM 'D:\Downloads\ratings.list\ratings.list.csv' DELIMITER ',' CSV;
 
-COPY CountriesCSV
-FROM 'C:\Users\Ruben\Documents\countries.list.csv' CSV;
-
-COPY LocationsCSV
-FROM 'C:\Users\Ruben\Documents\locations.list.csv' CSV;
-
-COPY MoviesCSV
-FROM 'C:\Users\Ruben\Documents\movies.list.csv' CSV;
+COPY CountriesCSV(movie_or_series,release_year,country)
+FROM 'D:\Downloads\countries.list\countries.list.csv' DELIMITER ',' CSV;

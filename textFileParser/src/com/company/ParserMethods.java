@@ -316,7 +316,6 @@ public class ParserMethods {
         //Get movie (or serie) name
         end = line.indexOf("(");
         if (end != -1) {
-
             int maxLoops = 5;
             // Loop till we have a valid year value (max 5 loops)
             while (maxLoops > 0){
@@ -334,9 +333,7 @@ public class ParserMethods {
 
                 maxLoops--;
             }
-            movieName = line.substring(0, end);
-            movieName = movieName.trim();
-
+            movieName = line.substring(0, end).trim();
             line = line.substring(end, line.length()).trim();
         }
 
@@ -385,7 +382,7 @@ public class ParserMethods {
             line = line.substring(end + 1, line.length()).trim();
         }
 
-        line = (forename + " " + surname).replace(",","").replace("\"","").replace("\'","").trim() + "," + movieName.replace(",","").replace("\"","").replace("\'","") + "," + releaseYear + "," + episodeName.replace(",","").replace("\"","") + "," + actorRole.replace("`","").replace("\"","").replace(",","");
+        line = (forename + " " + surname).replace(",","").replace("\"","").replace("\'","").trim() + "," + movieName.replace(",","").replace("\"","").replace("\'","").trim() + "," + releaseYear.trim() + "," + episodeName.replace(",","").replace("\"","").trim() + "," + actorRole.replace("`","").replace("\"","").replace(",","");
 
         // Sanity checks to avoid query errors
         int count = 0;
@@ -502,6 +499,74 @@ public class ParserMethods {
 
     /** Method for converting countries.list */
     public String CountriesList(String line){
+
+        String movieName = "";
+        String releaseYear = "";
+        String country = "";
+
+        // Get movie name
+        int end = line.indexOf("(");
+        if (end != -1){
+            int end2 = -1;
+            int maxLoops = 5;
+            // Loop till we have a valid year value (max 5 loops)
+            while (maxLoops > 0){
+                end2 = line.indexOf(")",end + 1);
+
+                // If it could be a year value
+                if (end2 - end >= 5 && !line.substring(end, end2).contains(" ") && !line.substring(end, end2).contains("\'")){
+                    if (isNumeric(line.substring(end + 1, end + 5)) || ('?' == line.charAt(end + 1)))
+                        break;
+                }
+                if (end2 != -1)
+                    end = end2;
+                else
+                    break;
+
+                maxLoops--;
+            }
+
+            movieName = line.substring(0, end);
+            line = line.substring(end + 1);
+        }
+        // Get release year
+        end = line.indexOf(")");
+        if (end != -1){
+            releaseYear = line.substring(0, end).replace("????","");
+            line = line.substring(end + 1);
+
+            int end2 = releaseYear.indexOf("/");
+            if (end2 != -1){
+                releaseYear = releaseYear.substring(0, end2);
+            }
+
+            end2 = releaseYear.indexOf("-");
+            if (end2 != -1)
+                releaseYear = releaseYear.substring(end2 + 1);
+
+            try{
+                Integer.parseInt(releaseYear);
+            } catch (Exception e){
+                releaseYear = "";
+            }
+        }
+
+        // Get country
+        country = line;
+        if (!country.isEmpty()){
+            end = country.indexOf("}");
+            if (end != -1)
+                country = country.substring(end + 1);
+            end = country.indexOf(")");
+            if (end != -1)
+                country = country.substring(end + 1);
+        }
+
+        return movieName.replace(",","").replace("\"","").replace("\'","").trim() + "," + releaseYear.trim() + "," + country.trim();
+    }
+
+    /** Method for converting countries.list */
+    public String CountriesListOld(String line){
         line = line.replace(","     ,";");
         line = line.replace(")}"    ,",");
         line = line.replace("(#"	,"#");

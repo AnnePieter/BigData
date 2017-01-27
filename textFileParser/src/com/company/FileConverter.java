@@ -136,7 +136,7 @@ public class FileConverter {
 
                 //process each line
                 String line = scanner.nextLine();
-                if (line.isEmpty())
+                if (line.isEmpty() || line.contains("SUSPENDED"))
                     continue;
 
                 // Check if the last line of data is reached (differs from file to file) (some files don't have end lines)
