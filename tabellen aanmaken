@@ -22,8 +22,21 @@ CREATE TABLE BiographiesCSV(
     birth_date date
 );
 
+CREATE TABLE BusinessCSV(
+    movie_or_series varchar NOT NULL,
+    currency varchar(3),
+    revenue bigint,
+    country varchar
+	
+CREATE TABLE RatingsCSV(
+    score numeric NOT NULL,
+    movie_or_series varchar
+);
+	
 CREATE TABLE CountriesCSV(
-    
+    movie_or_series varchar NOT NULL,
+	release_year int,
+	country varchar
 );
 
 CREATE TABLE LocationsCSV(
