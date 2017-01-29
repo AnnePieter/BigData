@@ -31,11 +31,11 @@ public class Main extends Application {
 
     Charset charset = StandardCharsets.ISO_8859_1;
 
-    File worldCSV = new File("D:///OneDrive/Documenten/school/Jaar2/Periode 2/Big Data/BigData/untitled/countries.csv");
-    Image imgWorld = new Image("file:///OneDrive/Documenten/school/Jaar2/Periode 2/Big Data/BigData/untitled/WorldMap.jpg");
+    File worldCSV = new File("C:/Users/annepieter/Documents/BigData/untitled/countries.csv");
+    Image imgWorld = new Image("file:///Users/annepieter/Documents/BigData/untitled/WorldMap.jpg");
 
-    File europeCSV = new File("D:///OneDrive/Documenten/school/Jaar2/Periode 2/Big Data/BigData/untitled/Europe.csv");
-    Image imgEurope = new Image("file:///OneDrive/Documenten/school/Jaar2/Periode 2/Big Data/BigData/untitled/Europe.jpg");
+    File europeCSV = new File("C:/Users/annepieter/Documents/BigData/untitled/Europe.csv");
+    Image imgEurope = new Image("file:///Users/annepieter/Documents/BigData/untitled/Europe.jpg");
 
     String[] europe = {"Albania","Armenia","Austria","Azerbaijan","Belarus","Belgium","Bosnia and Herzegovina","Bulgaria","Croatia","Cyprus","Czech Republic","Denmark","Estonia",
             "Finland","France","Georgia","Germany","Greece","Hungary","Ireland","Italy","Kazakhstan","Kosovo","Latvia","Lithuania","Luxembourg","Macedonia",
@@ -102,23 +102,22 @@ public class Main extends Application {
 
     public void Vraag_ImmigratieNederlanders(){
         ResetGraphicsContext();
-        ExecuteQuery("");
-
         gc.drawImage(imgWorld,0,0,1920,1080);
-
         // Draw lines
-        for(int x = 0; x < europe.length; x++) {
-            String euCountry = europe[x];
 
-            ExecuteQuery("SELECT country FROM actorscsv AS a INNER JOIN biographiescsv AS b ON a.actor=b.actor AS i INNER JOIN countriescsv AS c ON a.movie_or_series=c.movie_or_series WHERE birth_country NOT LIKE country AND birth_country LIKE 'Netherlands' UNION ALL SELECT country FROM actressescsv AS d INNER JOIN biographiescsv AS b ON d.actor=b.actor AS i INNER JOIN countriescsv AS c ON d.movie_or_series=c.movie_or_series WHERE birth_country NOT LIKE country AND birth_country LIKE 'Netherlands'");
-            try{
-                m_ResultSet.next();
-                gc.setStroke(Color.BLACK);
+            ExecuteQuery("SELECT DISTINCT country FROM actorscsv a INNER JOIN biographiescsv b ON a.actor=b.actor INNER JOIN countriescsv c ON a.movie_or_series=c.movie_or_series WHERE birth_country NOT LIKE country AND birth_country LIKE 'Netherlands' UNION ALL SELECT DISTINCT country FROM actressescsv d INNER JOIN biographiescsv b ON d.actor=b.actor INNER JOIN countriescsv c ON d.movie_or_series=c.movie_or_series WHERE birth_country NOT LIKE country AND birth_country LIKE 'Netherlands'");
+            for(int x =0; x<12;x++) {
+                try {
+                    m_ResultSet.next();
+                    gc.setStroke(Color.BLACK);
 
-                gc.strokeLine(coordsListWorld.get("Netherlands").getX(), coordsListWorld.get("Netherlands").getY(), coordsListWorld.get(m_ResultSet.getString("country")).getX(), coordsListWorld.get(m_ResultSet.getString("country")).getY());
-            } catch (Exception e) { e.printStackTrace(); }
+                    gc.strokeLine(coordsListWorld.get("Netherlands").getX(), coordsListWorld.get("Netherlands").getY(), coordsListWorld.get(m_ResultSet.getString("country")).getX(), coordsListWorld.get(m_ResultSet.getString("country")).getY());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
-        }
+
     }
 
     public void Vraag_ActeursEuropa(){
@@ -178,13 +177,6 @@ public class Main extends Application {
 
                 double xCoord = Double.parseDouble(lineparts[1]);
                 double yCoord = Double.parseDouble(lineparts[2]);
-
-                /*if(yCoord >920)
-                    yCoord -= 110;
-                else if(yCoord <920 && yCoord >720)
-                    yCoord -= 100;
-                else if(yCoord <720 && yCoord >540)
-                    yCoord -= 50;*/
 
                 coordsListEurope.put(lineparts[0], new Point2D.Double(xCoord, yCoord));
             }
