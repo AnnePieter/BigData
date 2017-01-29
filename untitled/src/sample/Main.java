@@ -1,54 +1,56 @@
 package sample;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.layout.*;
 
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.ArcType;
 import javafx.stage.Stage;
 
 import java.awt.geom.Point2D;
-import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.sql.DriverManager;
 import java.util.*;
 
-import javax.imageio.ImageIO;
-import javax.xml.transform.Result;
-import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class Main extends Application {
 
     Charset charset = StandardCharsets.ISO_8859_1;
-    File sourcefile = new File("D:///OneDrive/Documenten/school/Jaar2/Periode 2/Big Data/BigData/untitled/countries.csv");
-    Image img = new Image("file:///OneDrive/Documenten/school/Jaar2/Periode 2/Big Data/BigData/untitled/WorldMap.jpg");
+
+    File worldCSV = new File("D:///OneDrive/Documenten/school/Jaar2/Periode 2/Big Data/BigData/untitled/countries.csv");
+    Image imgWorld = new Image("file:///OneDrive/Documenten/school/Jaar2/Periode 2/Big Data/BigData/untitled/WorldMap.jpg");
+
+    File europeCSV = new File("D:///OneDrive/Documenten/school/Jaar2/Periode 2/Big Data/BigData/untitled/Europe.csv");
+    Image imgEurope = new Image("file:///OneDrive/Documenten/school/Jaar2/Periode 2/Big Data/BigData/untitled/Europe.jpg");
 
     String[] europe = {"Albania","Armenia","Austria","Azerbaijan","Belarus","Belgium","Bosnia and Herzegovina","Bulgaria","Croatia","Cyprus","Czech Republic","Denmark","Estonia",
             "Finland","France","Georgia","Germany","Greece","Hungary","Ireland","Italy","Kazakhstan","Kosovo","Latvia","Lithuania","Luxembourg","Macedonia",
             "Moldova","Netherlands","Norway","Poland","Portugal","Romania","Russia","Serbia","Slovakia","Slovenia","Spain","Sweden","Switzerland","Turkey","Ukraine","UK"};
 
     GraphicsContext gc;
-    Map<String,Point2D.Double> coordsList;
+    Map<String,Point2D.Double> coordsListWorld;
+    Map<String,Point2D.Double> coordsListEurope;
 
     Connection m_Connection;
     Statement m_Statement;
     ResultSet m_ResultSet;
+
+    public enum Questions { Vraag_ActeursEuropa, Vraag_ImmigratieNederlanders}
+    Questions currentQuestion;
 
     public static void main(String[] args) {
         launch(args);
@@ -59,15 +61,24 @@ public class Main extends Application {
         //Database connection
         GetDatabaseConnection();
 
-        Group root1 = new Group();
+        Group root = new Group();
         final Canvas canvas = new Canvas(2000,1500);
-        root1.getChildren().add(canvas);
+        canvas.setOnMouseClicked(event -> {
+            if (currentQuestion == Questions.Vraag_ActeursEuropa){
+                Vraag_ImmigratieNederlanders();
+                currentQuestion = Questions.Vraag_ImmigratieNederlanders;
+            }
+            else if (currentQuestion == Questions.Vraag_ImmigratieNederlanders){
+                Vraag_ActeursEuropa();
+                currentQuestion = Questions.Vraag_ActeursEuropa;
+            }
+        });
+        root.getChildren().add(canvas);
 
         gc = canvas.getGraphicsContext2D();
-        ResetGraphicsContext();
 
         //Create scene
-        Scene scene = new Scene(root1, 400,400);
+        Scene scene = new Scene(root, 400,400);
         scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         primaryStage.setFullScreen(true);
         primaryStage.setTitle("Visualisatie");
@@ -76,38 +87,61 @@ public class Main extends Application {
         //Set coords
         SetCoordsToImage();
 
+        //Vraag_ActeursEuropa();
+        //currentQuestion = Questions.Vraag_ActeursEuropa;
+
         Vraag_ImmigratieNederlanders();
+        currentQuestion = Questions.Vraag_ImmigratieNederlanders;
 
         primaryStage.show();
     }
 
     public void ResetGraphicsContext(){
         gc.clearRect(0,0,1920,1080);
-        gc.drawImage(img,0,0,1920,1080);
-
-        gc.setFill(Color.BLUE);
-        gc.fillRect(10,10,300,300);
     }
 
     public void Vraag_ImmigratieNederlanders(){
+        ResetGraphicsContext();
         ExecuteQuery("");
 
-        // Draw lines
-        for(int x=0;x<europe.length;x++) {
+        gc.drawImage(imgWorld,0,0,1920,1080);
 
+        // Draw lines
+        for(int x = 0; x < europe.length; x++) {
             String euCountry = europe[x];
-            gc.strokeLine(coordsList.get(euCountry).getX(), coordsList.get(euCountry).getY(), coordsList.get("USA").getX(), coordsList.get("USA").getY());
+
+            ExecuteQuery("SELECT country FROM actorscsv AS a INNER JOIN biographiescsv AS b ON a.actor=b.actor AS i INNER JOIN countriescsv AS c ON a.movie_or_series=c.movie_or_series WHERE birth_country NOT LIKE country AND birth_country LIKE 'Netherlands' UNION ALL SELECT country FROM actressescsv AS d INNER JOIN biographiescsv AS b ON d.actor=b.actor AS i INNER JOIN countriescsv AS c ON d.movie_or_series=c.movie_or_series WHERE birth_country NOT LIKE country AND birth_country LIKE 'Netherlands'");
+            try{
+                m_ResultSet.next();
+                gc.setStroke(Color.BLACK);
+
+                gc.strokeLine(coordsListWorld.get("Netherlands").getX(), coordsListWorld.get("Netherlands").getY(), coordsListWorld.get(m_ResultSet.getString("country")).getX(), coordsListWorld.get(m_ResultSet.getString("country")).getY());
+            } catch (Exception e) { e.printStackTrace(); }
+
         }
     }
 
-    public void Vraag_2(){
-        ExecuteQuery("");
+    public void Vraag_ActeursEuropa(){
+        ResetGraphicsContext();
+        gc.drawImage(imgEurope,0,0,1920,1080);
+
+        for(int x = 0; x < europe.length; x++) {
+            String euCountry = europe[x];
+            ExecuteQuery("SELECT COUNT(*) AS actorCount FROM BiographiesCSV WHERE birth_country LIKE '" + euCountry + "'");
+            try{
+                m_ResultSet.next();
+
+                gc.setStroke(Color.BLACK);
+                gc.strokeText("" + m_ResultSet.getInt("actorCount"),coordsListEurope.get(euCountry).getX(), coordsListEurope.get(euCountry).getY());
+            } catch (Exception e) { e.printStackTrace(); }
+        }
     }
 
     public void GetDatabaseConnection(){
         try{
             Class.forName("org.postgresql.Driver");
             m_Connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/BigData", "postgres", "admin");
+            System.out.println(m_Connection);
             m_Statement = m_Connection.createStatement();
         } catch(Exception e){
             e.printStackTrace();
@@ -115,8 +149,9 @@ public class Main extends Application {
     }
 
     public void SetCoordsToImage() throws Exception{
-        Scanner scanner = new Scanner(sourcefile);
-        coordsList = new HashMap<>();
+        //World
+        Scanner scanner = new Scanner(worldCSV);
+        coordsListWorld = new HashMap<>();
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String[] lineparts = line.split(",");
@@ -131,18 +166,39 @@ public class Main extends Application {
             else if(yCoord <720 && yCoord >540)
                 yCoord -= 50;
 
-            coordsList.put(lineparts[2], new Point2D.Double(xCoord, yCoord));
+            coordsListWorld.put(lineparts[2], new Point2D.Double(xCoord, yCoord));
         }
+
+        //Europe
+        scanner = new Scanner(europeCSV);
+        coordsListEurope = new HashMap<>();
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] lineparts = line.split(",");
+
+                double xCoord = Double.parseDouble(lineparts[1]);
+                double yCoord = Double.parseDouble(lineparts[2]);
+
+                /*if(yCoord >920)
+                    yCoord -= 110;
+                else if(yCoord <920 && yCoord >720)
+                    yCoord -= 100;
+                else if(yCoord <720 && yCoord >540)
+                    yCoord -= 50;*/
+
+                coordsListEurope.put(lineparts[0], new Point2D.Double(xCoord, yCoord));
+            }
     }
 
     public void ExecuteQuery(String query){
         try{
             m_ResultSet = m_Statement.executeQuery(query);
 
+            /*
             while (m_ResultSet.next()) {
                 System.out.println(m_ResultSet.getString(1) + ", " + m_ResultSet.getString(2) + ", "
                         + m_ResultSet.getString(3));
-            }
+            }*/
         } catch(Exception e){
             e.printStackTrace();
         }
