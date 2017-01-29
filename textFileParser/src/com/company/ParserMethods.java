@@ -41,41 +41,41 @@ public class ParserMethods {
     public String MoviesList(String line){
         //Get movie (or serie) name
         String movieName = "";
-        int end = line.lastIndexOf("\"");
-        if (end != -1){
-            movieName = line.substring(0, end + 1);
+        int splitIndex = line.lastIndexOf("\"");
+        if (splitIndex != -1){
+            movieName = line.substring(0, splitIndex + 1);
             movieName = movieName.replace("\"","").trim();
 
-            line = line.substring(end + 1, line.length()).trim();
+            line = line.substring(splitIndex + 1, line.length()).trim();
         }
         else{
-            end = line.indexOf("(");
-            if (end != -1){
-                movieName = line.substring(0, end);
+            splitIndex = line.indexOf("(");
+            if (splitIndex != -1){
+                movieName = line.substring(0, splitIndex);
                 movieName = movieName.trim();
 
-                line = line.substring(end, line.length()).trim();
+                line = line.substring(splitIndex, line.length()).trim();
             }
         }
 
         //Get release year
         String releaseYear = "";
-        end = line.indexOf(")");
-        if (end != -1){
-            releaseYear = line.substring(0, end + 1);
+        splitIndex = line.indexOf(")");
+        if (splitIndex != -1){
+            releaseYear = line.substring(0, splitIndex + 1);
             releaseYear = releaseYear.replace("(","").replace(")","").trim();
 
-            line = line.substring(end + 1, line.length()).trim();
+            line = line.substring(splitIndex + 1, line.length()).trim();
         }
 
         //Get episode name (if exists)
         String episodeInfo = "";
-        end = line.lastIndexOf("}");
-        if (end != -1){
-            episodeInfo = line.substring(0, end + 1);
+        splitIndex = line.lastIndexOf("}");
+        if (splitIndex != -1){
+            episodeInfo = line.substring(0, splitIndex + 1);
             episodeInfo = episodeInfo.replace("{","").replace("}","").trim();
 
-            line = line.substring(end + 1, line.length()).trim();
+            line = line.substring(splitIndex + 1, line.length()).trim();
         }
 
         line = movieName.replace(",",";") + "," + releaseYear + "," + episodeInfo.replace(",","") + ",";
@@ -101,56 +101,56 @@ public class ParserMethods {
     public String LocationsList(String line){
         //Get movie (or serie) name
         String movieName = "";
-        int end = line.indexOf(" (");
-        if (end != -1) {
-            movieName = line.substring(0, end);
+        int splitIndex = line.indexOf(" (");
+        if (splitIndex != -1) {
+            movieName = line.substring(0, splitIndex);
             movieName = movieName.trim();
 
-            line = line.substring(end, line.length()).trim();
+            line = line.substring(splitIndex, line.length()).trim();
         }
 
         //Get release year
         String releaseYear = "";
-        end = line.indexOf(")");
-        if (end != -1) {
+        splitIndex = line.indexOf(")");
+        if (splitIndex != -1) {
 
-            releaseYear = line.substring(0, end + 1);
+            releaseYear = line.substring(0, splitIndex + 1);
             releaseYear = releaseYear.replace("(","").replace(")","").trim();
 
-            int end2 = releaseYear.indexOf("/");
-            if (end2 != -1)
-                releaseYear = releaseYear.substring(0,end2);
+            int splitIndex2 = releaseYear.indexOf("/");
+            if (splitIndex2 != -1)
+                releaseYear = releaseYear.substring(0,splitIndex2);
 
 
-            line = line.substring(end + 1, line.length()).trim();
+            line = line.substring(splitIndex + 1, line.length()).trim();
         }
 
         //Get serie episode name (if found)
         String episodeName = "";
-        end = line.indexOf("}");
-        if (end != -1){
-            episodeName = line.substring(0, end + 1);
+        splitIndex = line.indexOf("}");
+        if (splitIndex != -1){
+            episodeName = line.substring(0, splitIndex + 1);
             episodeName = episodeName.replace("{","").replace("}","").trim();
 
-            line = line.substring(end + 1, line.length()).trim();
+            line = line.substring(splitIndex + 1, line.length()).trim();
         }
 
         //Get locations and store them in an array
         List<String> locations = new ArrayList<>();
         while (line.contains(",")){
-            end = line.indexOf(",");
-            if (end != -1){
-                locations.add(line.substring(0, end + 1).replace(",","").trim());
+            splitIndex = line.indexOf(",");
+            if (splitIndex != -1){
+                locations.add(line.substring(0, splitIndex + 1).replace(",","").trim());
 
-                line = line.substring(end + 1, line.length()).trim();
+                line = line.substring(splitIndex + 1, line.length()).trim();
             }
         }
-        //Get the last location (at the end of the string)
-        end = line.indexOf("(");
-        if (end != -1){
-            locations.add(line.substring(0, end).replace(",","").trim());
+        //Get the last location (at the splitIndex of the string)
+        splitIndex = line.indexOf("(");
+        if (splitIndex != -1){
+            locations.add(line.substring(0, splitIndex).replace(",","").trim());
 
-            line = line.substring(end, line.length()).trim();
+            line = line.substring(splitIndex, line.length()).trim();
         }
         else{
             locations.add(line.trim());
@@ -159,23 +159,23 @@ public class ParserMethods {
         line = movieName.replace(",","") + "," + releaseYear + "," + episodeName.replace(",","") + ",";
 
         int lol = 3;
-        //Starting at the end of the array to get the last 3 locations
+        //Starting at the splitIndex of the array to get the last 3 locations
         for (int i = locations.size() - 1; i > 0; i--){
             //Only use the last 3 entries in locations (we don't need stage name etc.)
             if (i == locations.size() - 4)
                 break;
 
             if (i == locations.size() - 3){
-                end = locations.get(i).indexOf(")");
-                if (end != -1) {
-                    locations.set(i, locations.get(i).substring(end + 1, locations.get(i).length()).trim());
+                splitIndex = locations.get(i).indexOf(")");
+                if (splitIndex != -1) {
+                    locations.set(i, locations.get(i).substring(splitIndex + 1, locations.get(i).length()).trim());
                 }
             }
             //For the last item in locations (first in loop)
             else if (i == locations.size()){
-                end = locations.get(i).indexOf("(");
-                if (end != -1) {
-                    locations.set(i, locations.get(i).substring(end, locations.get(i).length()).trim());
+                splitIndex = locations.get(i).indexOf("(");
+                if (splitIndex != -1) {
+                    locations.set(i, locations.get(i).substring(splitIndex, locations.get(i).length()).trim());
                 }
             }
 
@@ -273,10 +273,10 @@ public class ParserMethods {
 
             String surname = "";
             String forename = "";
-            int end = currentActor.indexOf(",");
-            if (end != -1){
-                surname = currentActor.substring(0, end).trim();
-                forename = currentActor.substring(end + 1).trim();
+            int splitIndex = currentActor.indexOf(",");
+            if (splitIndex != -1){
+                surname = currentActor.substring(0, splitIndex).trim();
+                forename = currentActor.substring(splitIndex + 1).trim();
             }
             else
                 forename = currentActor.trim();
@@ -291,20 +291,20 @@ public class ParserMethods {
         String surname = "";
         String forename = "";
         String movieName = "";
-        int end = -1;
-        int end2 = -1;
+        int splitIndex = -1;
+        int splitIndex2 = -1;
         //Check for actor
         if (!(line.startsWith("\t"))){
-            end = line.indexOf("\t");
-            currentActor = line.substring(0, end + 1).trim();
+            splitIndex = line.indexOf("\t");
+            currentActor = line.substring(0, splitIndex + 1).trim();
 
-            line = line.substring(end, line.length()).trim();
+            line = line.substring(splitIndex).trim();
         }
 
-        end = currentActor.indexOf(",");
-        if (end != -1){
-            surname = currentActor.substring(0, end).trim();
-            forename = currentActor.substring(end + 1).trim();
+        splitIndex = currentActor.indexOf(",");
+        if (splitIndex != -1){
+            surname = currentActor.substring(0, splitIndex).trim();
+            forename = currentActor.substring(splitIndex + 1).trim();
         }
         else
             forename = currentActor.trim();
@@ -314,46 +314,58 @@ public class ParserMethods {
             return (forename + " " + surname).replace(",","").trim() + "," + "Resonancia" + "," + "," + ",";
 
         //Get movie (or serie) name
-        end = line.indexOf("(");
-        if (end != -1) {
+
+        //Exception for lines that start with "("
+        line = line.trim();
+        if (line.startsWith("(") || line.startsWith("\"("))
+            splitIndex = line.indexOf("(", line.indexOf("(") + 1);
+        else
+            splitIndex = line.indexOf("(");
+
+        if (splitIndex != -1) {
             int maxLoops = 5;
             // Loop till we have a valid year value (max 5 loops)
             while (maxLoops > 0){
-                end2 = line.indexOf(")",end + 1);
-
-                // If it could be a year value
-                if (end2 - end >= 5 && !line.substring(end, end2).contains(" ") && !line.substring(end, end2).contains("\'")){
-                    if (isNumeric(line.substring(end + 1, end + 5)) || ('?' == line.charAt(end + 1)))
-                        break;
-                }
-                if (end2 != -1)
-                    end = end2;
-                else
+                splitIndex2 = line.indexOf(")",splitIndex);
+                // If no ")" is found
+                if (splitIndex2 == -1){
                     break;
-
+                }
+                else{
+                    // If it could be a year value
+                    if (splitIndex2 - splitIndex >= 5 && !line.substring(splitIndex, splitIndex2).contains(" ") && !line.substring(splitIndex, splitIndex2).contains("\'")){
+                        if (isNumeric(line.substring(splitIndex + 1, splitIndex + 5)) || ("????" == line.substring(splitIndex + 1, splitIndex + 5)))
+                            break;
+                    }
+                    else{
+                        splitIndex = line.indexOf("(",splitIndex2);
+                        if (splitIndex == -1)
+                            splitIndex = splitIndex2;
+                    }
+                }
                 maxLoops--;
             }
-            movieName = line.substring(0, end).trim();
-            line = line.substring(end, line.length()).trim();
+            movieName = line.substring(0, splitIndex).trim();
+            line = line.substring(splitIndex).trim();
         }
 
         //Get release year
         String releaseYear = "";
-        end = line.indexOf(")");
-        if (end != -1) {
-            releaseYear = line.substring(0, end + 1);
+        splitIndex = line.indexOf(")");
+        if (splitIndex != -1) {
+            releaseYear = line.substring(0, splitIndex + 1);
             releaseYear = releaseYear.replace("(","").replace(")","").replace("????","").trim();
-            end2 = releaseYear.indexOf("/");
-            if (end2 != -1){
-                releaseYear = releaseYear.substring(0, end2);
-                line = line.substring(end2 + 1, line.length()).trim();
+            splitIndex2 = releaseYear.indexOf("/");
+            if (splitIndex2 != -1){
+                releaseYear = releaseYear.substring(0, splitIndex2);
+                line = line.substring(splitIndex + 1).trim();
             }
             else
-                line = line.substring(end + 1, line.length()).trim();
+                line = line.substring(splitIndex + 1).trim();
 
-            end2 = releaseYear.indexOf("-");
-            if (end2 != -1)
-                releaseYear = releaseYear.substring(end2 + 1);
+            splitIndex2 = releaseYear.indexOf("-");
+            if (splitIndex2 != -1)
+                releaseYear = releaseYear.substring(splitIndex2 + 1);
 
             try{
                 Integer.parseInt(releaseYear);
@@ -364,22 +376,22 @@ public class ParserMethods {
 
         //Get serie episode name (if found)
         String episodeName = "";
-        end = line.indexOf("}");
-        if (end != -1){
-            episodeName = line.substring(0, end + 1);
+        splitIndex = line.indexOf("}");
+        if (splitIndex != -1){
+            episodeName = line.substring(0, splitIndex + 1);
             episodeName = episodeName.replace("{","").replace("}","").trim();
 
-            line = line.substring(end + 1, line.length()).trim();
+            line = line.substring(splitIndex + 1, line.length()).trim();
         }
 
         //Get actor role
         String actorRole = "";
-        end = line.indexOf("]");
-        if (end != -1){
-            actorRole = line.substring(0, end + 1);
+        splitIndex = line.indexOf("]");
+        if (splitIndex != -1){
+            actorRole = line.substring(0, splitIndex + 1);
             actorRole = actorRole.replace("[","").replace("]","").trim();
 
-            line = line.substring(end + 1, line.length()).trim();
+            line = line.substring(splitIndex + 1, line.length()).trim();
         }
 
         line = (forename + " " + surname).replace(",","").replace("\"","").replace("\'","").trim() + "," + movieName.replace(",","").replace("\"","").replace("\'","").trim() + "," + releaseYear.trim() + "," + episodeName.replace(",","").replace("\"","").trim() + "," + actorRole.replace("`","").replace("\"","").replace(",","");
@@ -404,11 +416,11 @@ public class ParserMethods {
 
         if (line.startsWith("MV:")){
             if (line.contains("(")){
-                int end = line.lastIndexOf("(");
-                //if (!Character.isDigit(line.charAt(end + 1)))
-               //if (end - 1 >= 0)
+                int splitIndex = line.lastIndexOf("(");
+                //if (!Character.isDigit(line.charAt(splitIndex + 1)))
+               //if (splitIndex - 1 >= 0)
 
-                currentMovie = line.substring(3, end);
+                currentMovie = line.substring(3, splitIndex);
             }
             else
                 currentMovie = line.substring(3);
@@ -426,15 +438,15 @@ public class ParserMethods {
             revenueData = revenueData.substring(3, revenueData.length());
 
             // Get revenue
-            int end = revenueData.indexOf("(");
-            if (end != -1){
-                revenue = revenueData.substring(0, end);
-                revenueData = revenueData.substring(end + 1, revenueData.length());
+            int splitIndex = revenueData.indexOf("(");
+            if (splitIndex != -1){
+                revenue = revenueData.substring(0, splitIndex);
+                revenueData = revenueData.substring(splitIndex + 1, revenueData.length());
 
                 // Get country
-                end = revenueData.indexOf(")");
-                if (end != -1){
-                    country = revenueData.substring(0, end);
+                splitIndex = revenueData.indexOf(")");
+                if (splitIndex != -1){
+                    country = revenueData.substring(0, splitIndex);
                 }
             } else
                 revenue = revenueData.substring(0, revenueData.length());
@@ -504,45 +516,56 @@ public class ParserMethods {
         String releaseYear = "";
         String country = "";
 
-        // Get movie name
-        int end = line.indexOf("(");
-        if (end != -1){
-            int end2 = -1;
+        //Get movie (or serie) name
+        int splitIndex = line.indexOf("(");
+
+        //Exception for lines that start with "("
+        line = line.trim();
+        if (line.startsWith("(") || line.startsWith("\"("))
+            splitIndex = line.indexOf("(", line.indexOf("(") + 1);
+
+        if (splitIndex != -1){
+            int splitIndex2 = -1;
             int maxLoops = 5;
             // Loop till we have a valid year value (max 5 loops)
             while (maxLoops > 0){
-                end2 = line.indexOf(")",end + 1);
-
-                // If it could be a year value
-                if (end2 - end >= 5 && !line.substring(end, end2).contains(" ") && !line.substring(end, end2).contains("\'")){
-                    if (isNumeric(line.substring(end + 1, end + 5)) || ('?' == line.charAt(end + 1)))
-                        break;
-                }
-                if (end2 != -1)
-                    end = end2;
-                else
+                splitIndex2 = line.indexOf(")",splitIndex);
+                // If no ")" is found
+                if (splitIndex2 == -1){
                     break;
-
+                }
+                else{
+                    // If it could be a year value
+                    if (splitIndex2 - splitIndex >= 5 && !line.substring(splitIndex, splitIndex2).contains(" ") && !line.substring(splitIndex, splitIndex2).contains("\'")){
+                        if (isNumeric(line.substring(splitIndex + 1, splitIndex + 5)) || ('?' == line.charAt(splitIndex + 1)))
+                            break;
+                    }
+                    else{
+                        splitIndex = line.indexOf("(",splitIndex2);
+                        if (splitIndex == -1)
+                            splitIndex = splitIndex2;
+                    }
+                }
                 maxLoops--;
             }
 
-            movieName = line.substring(0, end);
-            line = line.substring(end + 1);
+            movieName = line.substring(0, splitIndex);
+            line = line.substring(splitIndex + 1);
         }
         // Get release year
-        end = line.indexOf(")");
-        if (end != -1){
-            releaseYear = line.substring(0, end).replace("????","");
-            line = line.substring(end + 1);
+        splitIndex = line.indexOf(")");
+        if (splitIndex != -1){
+            releaseYear = line.substring(0, splitIndex).replace("????","");
+            line = line.substring(splitIndex + 1);
 
-            int end2 = releaseYear.indexOf("/");
-            if (end2 != -1){
-                releaseYear = releaseYear.substring(0, end2);
+            int splitIndex2 = releaseYear.indexOf("/");
+            if (splitIndex2 != -1){
+                releaseYear = releaseYear.substring(0, splitIndex2);
             }
 
-            end2 = releaseYear.indexOf("-");
-            if (end2 != -1)
-                releaseYear = releaseYear.substring(end2 + 1);
+            splitIndex2 = releaseYear.indexOf("-");
+            if (splitIndex2 != -1)
+                releaseYear = releaseYear.substring(splitIndex2 + 1);
 
             try{
                 Integer.parseInt(releaseYear);
@@ -554,50 +577,15 @@ public class ParserMethods {
         // Get country
         country = line;
         if (!country.isEmpty()){
-            end = country.indexOf("}");
-            if (end != -1)
-                country = country.substring(end + 1);
-            end = country.indexOf(")");
-            if (end != -1)
-                country = country.substring(end + 1);
+            splitIndex = country.indexOf("}");
+            if (splitIndex != -1)
+                country = country.substring(splitIndex + 1);
+            splitIndex = country.indexOf(")");
+            if (splitIndex != -1)
+                country = country.substring(splitIndex + 1);
         }
 
         return movieName.replace(",","").replace("\"","").replace("\'","").trim() + "," + releaseYear.trim() + "," + country.trim();
-    }
-
-    /** Method for converting countries.list */
-    public String CountriesListOld(String line){
-        line = line.replace(","     ,";");
-        line = line.replace(")}"    ,",");
-        line = line.replace("(#"	,"#");
-        line = line.replace("\""    ,"");
-        line = line.replace("("     ,",");
-        line = line.replace(")"     ,",");
-        line = line.replace("{"     ,"");
-        line = line.replace("}}"    ,"");
-        line = line.replace("\t"    ,",");
-
-        for(int i = 0; i < 10; i++)
-        {
-            String repstr = ",,,,";
-            line = line.replace(repstr,",,,");
-        }
-
-        int count = 0;
-        for(int x = 0; x < line.length(); x++)
-        {
-            if(line.charAt(x) == ',')
-            {
-                count++;
-            }
-        }
-
-        while(count > 3) {
-            line = line.replace(",,", ",");
-            count--;
-        }
-
-        return line;
     }
 
     /** Method for checking if a string consists only of integers */
