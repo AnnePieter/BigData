@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<BorderPane prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <bottom>
+      <HBox prefHeight="11.0" prefWidth="786.0" style="-fx-background-color: lightgrey;" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="lbl_statusMessage" text="Status: OK" textAlignment="CENTER">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+               </padding>
+            </Label>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </HBox>
+   </bottom>
+   <center>
+      <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Parser">
+               <content>
+                  <BorderPane prefHeight="325.0" prefWidth="665.0">
+                     <center>
+                        <Pane prefHeight="461.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextField fx:id="txtF_FolderPath" editable="false" layoutX="290.0" layoutY="45.0" promptText="folder path" />
+                              <Button fx:id="btn_SelectFolder" layoutX="168.0" layoutY="45.0" mnemonicParsing="false" onAction="#btnPress_SelectFolder" prefHeight="25.0" prefWidth="90.0" text="Select Folder" />
+                              <Button fx:id="btn_ParseFiles" layoutX="462.0" layoutY="467.0" mnemonicParsing="false" onAction="#btnPress_ParseFiles" prefHeight="25.0" prefWidth="90.0" text="Parse All Files" />
+                              <Label alignment="CENTER" layoutX="168.0" layoutY="22.0" prefHeight="19.0" prefWidth="271.0" style="-fx-border-style: solid; -fx-border-width: 0.5px;" text="Choose a folder">
+                                 <font>
+                                    <Font name="System Bold Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                              <ListView fx:id="listV_SelectedFiles" layoutX="164.0" layoutY="98.0" prefHeight="325.0" prefWidth="686.0" />
+                              <Button fx:id="btn_SelectFile" layoutX="582.0" layoutY="51.0" mnemonicParsing="false" onAction="#btnPress_SelectFile" prefHeight="25.0" prefWidth="90.0" text="Select File" />
+                              <TextField fx:id="txtF_FilePath" editable="false" layoutX="698.0" layoutY="51.0" promptText="file path" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="576.0" layoutY="22.0" prefHeight="19.0" prefWidth="271.0" style="-fx-border-style: solid; -fx-border-width: 0.5px;" text="Choose a file">
+                                 <font>
+                                    <Font name="Arial Bold Italic" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <BorderPane.margin>
+                              <Insets />
+                           </BorderPane.margin>
+                        </Pane>
+                     </center>
+                  </BorderPane>
+               </content>
+          </Tab>
+            <Tab text="Query Tool">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <left>
+                        <VBox prefHeight="401.0" prefWidth="173.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Pane prefHeight="371.0" prefWidth="173.0">
+                                 <children>
+                                    <Button fx:id="btn_ExecuteQuery" disable="true" layoutX="41.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnPress_ExecuteUserQuery" text="Execute Query" />
+                                    <Button fx:id="btn_QueryToolRefreshTable" layoutX="41.0" layoutY="307.0" mnemonicParsing="false" onAction="#btnPress_RefreshQueryToolTableView" text="Refresh Table" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </VBox>
+                     </left>
+                     <center>
+                        <TableView fx:id="tblV_UserQueryResult" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets right="5.0" />
+                           </BorderPane.margin></TableView>
+                     </center>
+                     <top>
+                        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Pane prefHeight="52.0" prefWidth="1024.0">
+                                 <children>
+                                    <Label layoutX="5.0" layoutY="2.0" prefHeight="17.0" prefWidth="1014.0" text="Custom query:">
+                                       <padding>
+                                          <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="System Bold Italic" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <TextArea fx:id="txtA_UserQuery" prefHeight="200.0" prefWidth="200.0">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                 </padding>
+                              </TextArea>
+                           </children>
+                        </VBox>
+                     </top>
+                  </BorderPane>
+               </content>
+            </Tab>
+          <Tab text="Visualisation">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <Button fx:id="btn_ShowVisualisation" disable="true" mnemonicParsing="false" onAction="#btnPress_ShowVisualisation" text="Show" BorderPane.alignment="CENTER" />
+                     </center></BorderPane>
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+   <top>
+      <HBox prefHeight="167.0" prefWidth="1024.0" style="-fx-background-color: lightgrey;" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="157.0" prefWidth="1055.0" style="-fx-border-style: solid; -fx-border-width: 0.5; -fx-background-color: lightblue;">
+               <children>
+                  <Button fx:id="btn_ConnectToDatabase" layoutX="407.0" layoutY="119.0" mnemonicParsing="false" onAction="#btnPress_ConnectToDatabase" text="Connect" />
+                  <TextField fx:id="txtF_DatabaseAddress" layoutX="119.0" layoutY="35.0" prefHeight="25.0" prefWidth="348.0" promptText="database adress" text="jdbc:postgresql://localhost:5432/BigData" />
+                  <TextField fx:id="txtF_DatabaseUserName" layoutX="119.0" layoutY="76.0" prefHeight="25.0" prefWidth="170.0" promptText="user" text="postgres" />
+                  <TextField fx:id="txtF_DatabaseUserPassword" layoutX="119.0" layoutY="119.0" prefHeight="25.0" prefWidth="170.0" promptText="database password" text="admin" />
+                  <Label layoutX="17.0" layoutY="6.0" prefHeight="16.0" prefWidth="468.0" text="Database connection settings">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text layoutX="14.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Database address" />
+                  <Text layoutX="14.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name" />
+                  <Text layoutX="14.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Password" />
+               </children>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+            </Pane>
+            <BorderPane prefHeight="157.0" prefWidth="1055.0" style="-fx-border-style: solid; -fx-border-width: 0.5; -fx-background-color: lightblue;">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+               <bottom>
+                  <ListView fx:id="listV_StatusMessages" prefHeight="118.0" prefWidth="487.0" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+                     </BorderPane.margin>
+                  </ListView>
+               </bottom>
+               <top>
+                  <Pane prefHeight="24.0" prefWidth="501.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label layoutX="17.0" layoutY="6.0" prefHeight="16.0" prefWidth="468.0" text="Status Messages">
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </top>
+            </BorderPane>
+         </children>
+      </HBox>
+   </top>
+</BorderPane>
