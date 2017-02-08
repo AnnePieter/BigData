@@ -1,60 +1,60 @@
 -- Gemaakt door Ruben Guit
 
 CREATE TABLE ActorsCSV(
-    actor varchar(100) NOT NULL,
-    movie_or_series varchar(100) NOT NULL,
+    actor varchar NOT NULL,
+    movie_or_series varchar NOT NULL,
     release_year int,
-    episode_name varchar(100),
-    actor_role varchar (100)
+    episode_name varchar,
+    actor_role varchar
 );
 
 CREATE TABLE ActressesCSV(
-    actor varchar(100) NOT NULL,
-    movie_or_series varchar(100) NOT NULL,
+    actor varchar NOT NULL,
+    movie_or_series varchar NOT NULL,
     release_year int,
-    episode_name varchar(100),
-    actor_role varchar (100)
+    episode_name varchar,
+    actor_role varchar
 );
 
 CREATE TABLE BiographiesCSV(
-    actor varchar (100) NOT NULL,
-    birth_country varchar (100),
+    actor varchar NOT NULL,
+    birth_country varchar,
     birth_date date
 );
 
 CREATE TABLE BusinessCSV(
-    movie_or_series varchar(100) NOT NULL,
+    movie_or_series varchar NOT NULL,
     currency varchar(10),
-    revenue int NOT NULL,
-    place varchar(100)
+    revenue bigint NOT NULL,
+    country varchar
 );
 
 CREATE TABLE CountriesCSV(
-    movie_or_series varchar(100) NOT NULL,
+    movie_or_series varchar NOT NULL,
     release_year int,
-    country varchar(100)
+    country varchar
 );
 
 CREATE TABLE RatingsCSV(
     rating decimal NOT NULL,
-    movie_or_series varchar(100) NOT NULL
+    movie_or_series varchar NOT NULL
 );
 
 
 CREATE TABLE Actors(
     ActorID BIGSERIAL PRIMARY KEY NOT NULL,
-    actor varchar(100) NOT NULL,
-    birth_country varchar (100),
+    actor varchar NOT NULL,
+    birth_country varchar,
     birth_date date,
     gender varchar(10) NOT NULL,
-    country varchar(100)
+    country varchar
 );
 
 CREATE TABLE Movies(
     MovieID BIGSERIAL PRIMARY KEY NOT NULL,
-    movie_or_series varchar(100) NOT NULL,
+    movie_or_series varchar NOT NULL,
     release_year int NOT NULL,
-    country varchar(100),
+    country varchar,
     rating decimal,
     revenue int,
     currency varchar(10)

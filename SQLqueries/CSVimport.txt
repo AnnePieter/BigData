@@ -3,19 +3,19 @@
 set client_encoding to 'latin1';
 
 COPY ActorsCSV (actor,movie_or_series,release_year,episode_name,actor_role)
-FROM 'D:\Downloads\actors.list\actors.list.csv' DELIMITER ',' CSV;
+FROM 'D:\Downloads\IMDBfiles\actors.list.csv' DELIMITER ',' CSV;
 
 COPY ActressesCSV (actor,movie_or_series,release_year,episode_name,actor_role)
-FROM 'D:\Downloads\actresses.list\actresses.list.csv' DELIMITER ',' CSV;
+FROM 'D:\Downloads\IMDBfiles\actresses.list.csv' DELIMITER ',' CSV;
 
 COPY BusinessCSV (movie_or_series,currency,revenue,country)
-FROM 'D:\Downloads\business.list\business.list.csv' DELIMITER ',' CSV;
+FROM 'D:\Downloads\IMDBfiles\business.list.csv' DELIMITER ',' CSV;
 
 COPY BiographiesCSV (actor,birth_country,birth_date)
-FROM 'D:\Downloads\biographies.list\biographies.list.csv' DELIMITER ',' CSV;
+FROM 'D:\Downloads\IMDBfiles\biographies.list.csv' DELIMITER ',' CSV;
 
-COPY RatingsCSV (score,movie_or_series)
-FROM 'D:\Downloads\ratings.list\ratings.list.csv' DELIMITER ',' CSV;
+COPY RatingsCSV (rating,movie_or_series)
+FROM 'D:\Downloads\IMDBfiles\ratings.list.csv' DELIMITER ',' CSV;
 
 COPY CountriesCSV(movie_or_series,release_year,country)
-FROM 'D:\Downloads\countries.list\countries.list.csv' DELIMITER ',' CSV;
+FROM 'D:\Downloads\IMDBfiles\countries.list.csv' DELIMITER ',' CSV;

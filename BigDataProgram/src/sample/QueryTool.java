@@ -43,7 +43,7 @@ public class QueryTool {
         controller.btn_ExecuteQuery.setDisable(false);
     }
 
-    public void ExecuteUserQuery(String query){
+    public void ExecuteTableFillQuery(String query){
         controller.btn_ExecuteQuery.setDisable(true);
 
         try {

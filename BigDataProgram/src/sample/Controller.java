@@ -59,10 +59,18 @@ public class Controller implements Initializable{
     TextArea txtA_UserQuery;
     @FXML
     TableView<ObservableList> tblV_UserQueryResult;
+    @FXML
+    TextField txtF_SearchByActorName;
+    @FXML
+    Button btn_SearchByActorName;
 
     // Visualisation related variables
     @FXML
-    Button btn_ShowVisualisation;
+    Button btn_ShowVisualisationEurope;
+    @FXML
+    Button btn_ShowVisualisationWorld;
+    @FXML
+    TextField txtF_ActorImmigrationCountry;
 
 
     public void initialize(URL location, ResourceBundle resources){
@@ -171,7 +179,8 @@ public class Controller implements Initializable{
 
                 // Enable connection related buttons
                 btn_ExecuteQuery.setDisable(false);
-                btn_ShowVisualisation.setDisable(false);
+                btn_ShowVisualisationEurope.setDisable(false);
+                btn_ShowVisualisationWorld.setDisable(false);
 
                 btn_ConnectToDatabase.setText("Disconnect");
                 UpdateStatusLabel("Successfully connected to the database\t-\tAddress: " + txtF_DatabaseAddress.getText() + "\t-\tUser: " + txtF_DatabaseUserPassword.getText() + "");
@@ -182,7 +191,8 @@ public class Controller implements Initializable{
 
                 // Disable connection related buttons to avoid errors
                 btn_ExecuteQuery.setDisable(true);
-                btn_ShowVisualisation.setDisable(true);
+                btn_ShowVisualisationEurope.setDisable(true);
+                btn_ShowVisualisationWorld.setDisable(true);
 
                 btn_ConnectToDatabase.setText("Connect");
                 UpdateStatusLabel("Successfully disconnected from the database\t-\tAddress: " + txtF_DatabaseAddress.getText());
@@ -197,34 +207,42 @@ public class Controller implements Initializable{
     }
 
     /** Button method that executes a query (result is saved in QueryTool class)*/
-    public void btnPress_ExecuteUserQuery(ActionEvent e){
+    public void btnPress_ExecuteCustomQuery(ActionEvent e){
         if (!txtA_UserQuery.getText().isEmpty()){
-            ExecuteUserQueryOnThread(txtA_UserQuery.getText());
+            ExecuteCustomQueryOnThread(txtA_UserQuery.getText());
         }
         else
             UpdateStatusLabel("Make a valid query first!");
     }
 
-    /** Method for executing a user query on a new thread */
-    private void ExecuteUserQueryOnThread(String query){
+    public void btnPress_ExecuteStandardQuery(ActionEvent e){
+        if (!txtF_SearchByActorName.getText().isEmpty()){
+            ExecuteStandardQueryOnThread("SELECT * FROM ActorsCSV WHERE actor LIKE '%" + txtF_SearchByActorName.getText() + "%'");
+        }
+        else
+            UpdateStatusLabel("Make a valid query first!");
+    }
+
+    /** Method for executing a CUSTOM query on a new thread */
+    private void ExecuteCustomQueryOnThread(String query){
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
                 try{
-                    main.GetQueryTool().ExecuteUserQuery(query);
+                    main.GetQueryTool().ExecuteTableFillQuery(query);
                 }
                 catch(Exception x){ UpdateStatusLabel(x.getMessage()); }
             }
         }); t.start();
     }
 
-    /** Method for executing a query on a new thread */
-    private void ExecuteQueryOnThread(String query){
+    /** Method for executing a STANDARD query on a new thread */
+    private void ExecuteStandardQueryOnThread(String query){
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
                 try{
-                    main.GetQueryTool().ExecuteQuery(query);
+                    main.GetQueryTool().ExecuteTableFillQuery(query);
                 }
                 catch(Exception x){ UpdateStatusLabel(x.getMessage()); }
             }
@@ -236,8 +254,8 @@ public class Controller implements Initializable{
     //
 
     /** Method for showing the chosen visualisation */
-    public void btnPress_ShowVisualisation(ActionEvent e){
-        main.GetVisualisation().ShowVisualisation();
-    }
+    public void btnPress_ShowVisualisationEurope(ActionEvent e){ main.GetVisualisation().ShowVisualisation("ActeursEuropa"); }
+
+    public void btnPress_ShowVisualisationWorld(ActionEvent e){ main.GetVisualisation().ShowVisualisation("ImmigratieNederlanders"); }
 
 }

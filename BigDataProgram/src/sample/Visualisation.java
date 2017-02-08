@@ -1,8 +1,6 @@
 package sample;
 
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -10,13 +8,9 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import javax.imageio.ImageIO;
 import java.awt.geom.Point2D;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.net.URL;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -51,7 +45,7 @@ public class Visualisation {
         try {SetCoordsToImage(); } catch (Exception e) { controller.UpdateStatusLabel(e.getMessage()); }
     }
 
-    public void ShowVisualisation(){
+    public void ShowVisualisation(String question){
         try {
             Group root = new Group();
             final Canvas canvas = new Canvas(2000,1500);
@@ -67,7 +61,11 @@ public class Visualisation {
             visualisationStage.setTitle("Visualisatie");
             visualisationStage.setScene(scene);
 
-            Vraag_ActeursEuropa();
+            switch (question){
+                case "ActeursEuropa": Question_ActorCountEurope(); break;
+                case "ImmigratieNederlanders": Question_ActorImmigration(); break;
+                default: break;
+            }
 
             visualisationStage.show();
         }
@@ -78,24 +76,25 @@ public class Visualisation {
         gc.clearRect(0, 0, 1920, 1080);
     }
 
-    public void Vraag_ImmigratieNederlanders() {
-        //ResetGraphicsContext();
+    public void Question_ActorImmigration() {
+        ResetGraphicsContext();
         gc.drawImage(imgWorld, 0, 0, 1920, 1080);
+        String actorCountry = controller.txtF_ActorImmigrationCountry.getText();
 
         // Draw lines
-        main.GetQueryTool().ExecuteQuery("SELECT DISTINCT country FROM actorscsv a INNER JOIN biographiescsv b ON a.actor=b.actor INNER JOIN countriescsv c ON a.movie_or_series=c.movie_or_series WHERE birth_country NOT LIKE country AND birth_country LIKE 'Netherlands' UNION ALL SELECT DISTINCT country FROM actressescsv d INNER JOIN biographiescsv b ON d.actor=b.actor INNER JOIN countriescsv c ON d.movie_or_series=c.movie_or_series WHERE birth_country NOT LIKE country AND birth_country LIKE 'Netherlands'");
+        main.GetQueryTool().ExecuteQuery("SELECT DISTINCT country FROM actorscsv a INNER JOIN biographiescsv b ON a.actor=b.actor INNER JOIN countriescsv c ON a.movie_or_series=c.movie_or_series WHERE birth_country NOT LIKE country AND birth_country LIKE '%" + actorCountry + "%' UNION ALL SELECT DISTINCT country FROM actressescsv d INNER JOIN biographiescsv b ON d.actor=b.actor INNER JOIN countriescsv c ON d.movie_or_series=c.movie_or_series WHERE birth_country NOT LIKE country AND birth_country LIKE '%" + actorCountry +"%'");
         ResultSet m_ResultSet = main.GetQueryTool().GetResultSet();
         for (int x = 0; x < 12; x++) {
             try {
                 m_ResultSet.next();
                 gc.setStroke(Color.BLACK);
 
-                gc.strokeLine(coordsListWorld.get("Netherlands").getX(), coordsListWorld.get("Netherlands").getY(), coordsListWorld.get(m_ResultSet.getString("country")).getX(), coordsListWorld.get(m_ResultSet.getString("country")).getY());
+                gc.strokeLine(coordsListWorld.get(actorCountry).getX(), coordsListWorld.get(actorCountry).getY(), coordsListWorld.get(m_ResultSet.getString("country")).getX(), coordsListWorld.get(m_ResultSet.getString("country")).getY());
             } catch (Exception e) { controller.UpdateStatusLabel(e.getMessage()); }
         }
     }
 
-    public void Vraag_ActeursEuropa() {
+    public void Question_ActorCountEurope() {
         ResetGraphicsContext();
         gc.drawImage(imgEurope, 0, 0, 1920, 1080);
 
