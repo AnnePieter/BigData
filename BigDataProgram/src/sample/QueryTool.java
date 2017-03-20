@@ -32,6 +32,7 @@ public class QueryTool {
         this.controller = Controller.GetInstance();
     }
 
+    /** Method that executes a query and stores the result in this class */
     public void ExecuteQuery(String query) {
         controller.btn_ExecuteQuery.setDisable(true);
 
@@ -43,6 +44,7 @@ public class QueryTool {
         controller.btn_ExecuteQuery.setDisable(false);
     }
 
+    /** Method that executes a query and stores the result in this class, then fills the tableview with the result */
     public void ExecuteTableFillQuery(String query){
         controller.btn_ExecuteQuery.setDisable(true);
 
@@ -55,6 +57,7 @@ public class QueryTool {
         controller.btn_ExecuteQuery.setDisable(false);
     }
 
+    /** Method that fills our tableview with the query results */
     public void FillResultsTable(){
         try{
             ObservableList<ObservableList> data = FXCollections.observableArrayList();
@@ -63,9 +66,9 @@ public class QueryTool {
             Platform.runLater( () -> controller.tblV_UserQueryResult.getColumns().clear());
 
             // create columns
-            for(int i = 0; i < m_ResultSet.getMetaData().getColumnCount(); i++) {
+            for(int i = 0; i < this.m_ResultSet.getMetaData().getColumnCount(); i++) {
                 final int j = i;
-                    TableColumn col = new TableColumn(m_ResultSet.getMetaData().getColumnName(i + 1));
+                    TableColumn col = new TableColumn(this.m_ResultSet.getMetaData().getColumnName(i + 1));
                     col.setSortable(false);
 
                     // Get the cell value for the column
@@ -82,12 +85,12 @@ public class QueryTool {
             }
 
             // fill tableview
-            while(m_ResultSet.next()){
+            while(this.m_ResultSet.next()){
                 //Iterate Row
                 ObservableList<String> row = FXCollections.observableArrayList();
-                for(int i = 1; i <= m_ResultSet.getMetaData().getColumnCount(); i++){
+                for(int i = 1; i <= this.m_ResultSet.getMetaData().getColumnCount(); i++){
                     //Iterate Column
-                    row.add(m_ResultSet.getString(i));
+                    row.add(this.m_ResultSet.getString(i));
                 }
                 data.add(row);
 

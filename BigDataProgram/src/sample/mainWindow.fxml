@@ -75,7 +75,7 @@
                            <children>
                               <Pane prefHeight="371.0" prefWidth="173.0">
                                  <children>
-                                    <Button fx:id="btn_QueryToolRefreshTable" layoutX="49.0" layoutY="219.0" mnemonicParsing="false" onAction="#btnPress_RefreshQueryToolTableView" text="Clear Table" />
+                                    <Button fx:id="btn_QueryToolRefreshTable" layoutX="49.0" layoutY="219.0" mnemonicParsing="false" onAction="#btnPress_ClearQueryToolTableView" text="Clear Table" />
                                  </children>
                               </Pane>
                            </children>
@@ -103,7 +103,10 @@
                                                    <children>
                                                       <Label layoutX="24.0" layoutY="33.0" text="search actor" />
                                                       <TextField fx:id="txtF_SearchByActorName" layoutX="100.0" layoutY="29.0" promptText="actor name" />
-                                                      <Button fx:id="btn_SearchByActorName" layoutX="270.0" layoutY="29.0" mnemonicParsing="false" onAction="#btnPress_ExecuteStandardQuery" text="Search" />
+                                                      <Button fx:id="btn_SearchByActorName" disable="true" layoutX="270.0" layoutY="29.0" mnemonicParsing="false" onAction="#btnPress_ExecuteStandardQuerySearchActor" text="Search" />
+                                                      <Button fx:id="btn_SearchByMovieName" disable="true" layoutX="271.0" layoutY="67.0" mnemonicParsing="false" onAction="#btnPress_ExecuteStandardQuerySearchMovie" text="Search" />
+                                                      <TextField fx:id="txtF_SearchByMovieName" layoutX="101.0" layoutY="67.0" promptText="movie name" />
+                                                      <Label layoutX="25.0" layoutY="71.0" text="search movie" />
                                                    </children>
                                                 </Pane>
                                              </center>

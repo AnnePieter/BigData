@@ -45,6 +45,7 @@ public class Visualisation {
         try {SetCoordsToImage(); } catch (Exception e) { controller.UpdateStatusLabel(e.getMessage()); }
     }
 
+    /** Method that displays the selected visualisation question */
     public void ShowVisualisation(String question){
         try {
             Group root = new Group();
@@ -58,8 +59,10 @@ public class Visualisation {
             scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
             Stage visualisationStage = new Stage();
             visualisationStage.setFullScreen(true);
-            visualisationStage.setTitle("Visualisatie");
+            visualisationStage.setTitle("Visualisation");
             visualisationStage.setScene(scene);
+
+            ResetGraphicsContext();
 
             switch (question){
                 case "ActeursEuropa": Question_ActorCountEurope(); break;
@@ -72,12 +75,13 @@ public class Visualisation {
         catch (Exception e) { controller.UpdateStatusLabel(e.getMessage()); }
     }
 
+    /** Method that clears the visualisation window */
     public void ResetGraphicsContext() {
         gc.clearRect(0, 0, 1920, 1080);
     }
 
+    /** Method that visualises the actor immigration from the specified country*/
     public void Question_ActorImmigration() {
-        ResetGraphicsContext();
         gc.drawImage(imgWorld, 0, 0, 1920, 1080);
         String actorCountry = controller.txtF_ActorImmigrationCountry.getText();
 
@@ -94,8 +98,8 @@ public class Visualisation {
         }
     }
 
+    /** Method that visualises the actor count in Europe*/
     public void Question_ActorCountEurope() {
-        ResetGraphicsContext();
         gc.drawImage(imgEurope, 0, 0, 1920, 1080);
 
         for (int x = 0; x < europe.length; x++) {
@@ -111,6 +115,7 @@ public class Visualisation {
         }
     }
 
+    /** Method that */
     public void SetCoordsToImage() throws Exception {
         //World
         Scanner scanner = new Scanner(worldCSV);

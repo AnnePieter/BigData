@@ -51,7 +51,6 @@ public class ParserMethods {
     private String previousMovie = "";
 
     public ParserMethods(){
-
     }
 
     /** Method for converting movies.list */

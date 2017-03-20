@@ -23,8 +23,6 @@ public class Controller implements Initializable{
 
     private Main main;
 
-    private ArrayList<Thread> parserThreads = new ArrayList<>();
-
     @FXML
     Label lbl_statusMessage;
     @FXML
@@ -63,6 +61,10 @@ public class Controller implements Initializable{
     TextField txtF_SearchByActorName;
     @FXML
     Button btn_SearchByActorName;
+    @FXML
+    TextField txtF_SearchByMovieName;
+    @FXML
+    Button btn_SearchByMovieName;
 
     // Visualisation related variables
     @FXML
@@ -177,8 +179,10 @@ public class Controller implements Initializable{
             try {
                 main.CreateDatabaseConnection(txtF_DatabaseAddress.getText(), txtF_DatabaseUserName.getText(), txtF_DatabaseUserPassword.getText());
 
-                // Enable connection related buttons
+                // Enable connection dependent buttons
                 btn_ExecuteQuery.setDisable(false);
+                btn_SearchByActorName.setDisable(false);
+                btn_SearchByMovieName.setDisable(false);
                 btn_ShowVisualisationEurope.setDisable(false);
                 btn_ShowVisualisationWorld.setDisable(false);
 
@@ -189,8 +193,10 @@ public class Controller implements Initializable{
             try {
                 main.CloseDatabaseConnection();
 
-                // Disable connection related buttons to avoid errors
+                // Disable connection dependent buttons to avoid errors
                 btn_ExecuteQuery.setDisable(true);
+                btn_SearchByActorName.setDisable(true);
+                btn_SearchByMovieName.setDisable(true);
                 btn_ShowVisualisationEurope.setDisable(true);
                 btn_ShowVisualisationWorld.setDisable(true);
 
@@ -200,13 +206,14 @@ public class Controller implements Initializable{
         }
     }
 
-    public void btnPress_RefreshQueryToolTableView(ActionEvent e){
+    /** Button method that clears the tableview */
+    public void btnPress_ClearQueryToolTableView(ActionEvent e){
         tblV_UserQueryResult.getColumns().clear();
         tblV_UserQueryResult.setItems(FXCollections.observableArrayList());
         tblV_UserQueryResult.refresh();
     }
 
-    /** Button method that executes a query (result is saved in QueryTool class)*/
+    /** Button method that executes a custom query (result is saved in QueryTool class)*/
     public void btnPress_ExecuteCustomQuery(ActionEvent e){
         if (!txtA_UserQuery.getText().isEmpty()){
             ExecuteCustomQueryOnThread(txtA_UserQuery.getText());
@@ -215,9 +222,19 @@ public class Controller implements Initializable{
             UpdateStatusLabel("Make a valid query first!");
     }
 
-    public void btnPress_ExecuteStandardQuery(ActionEvent e){
+    /** Button method that executes a custom query (result is saved in QueryTool class)*/
+    public void btnPress_ExecuteStandardQuerySearchActor(ActionEvent e){
         if (!txtF_SearchByActorName.getText().isEmpty()){
             ExecuteStandardQueryOnThread("SELECT * FROM ActorsCSV WHERE actor LIKE '%" + txtF_SearchByActorName.getText() + "%'");
+        }
+        else
+            UpdateStatusLabel("Make a valid query first!");
+    }
+
+    /** Button method that executes a custom query (result is saved in QueryTool class)*/
+    public void btnPress_ExecuteStandardQuerySearchMovie(ActionEvent e){
+        if (!txtF_SearchByMovieName.getText().isEmpty()){
+            ExecuteStandardQueryOnThread("SELECT * FROM MoviesCSV WHERE movie_or_series LIKE '%" + txtF_SearchByMovieName.getText() + "%'");
         }
         else
             UpdateStatusLabel("Make a valid query first!");
@@ -253,9 +270,10 @@ public class Controller implements Initializable{
     // Methods related to our visualisation
     //
 
-    /** Method for showing the chosen visualisation */
+    /** Method for showing the visualisation of the quantity of actors in Europe */
     public void btnPress_ShowVisualisationEurope(ActionEvent e){ main.GetVisualisation().ShowVisualisation("ActeursEuropa"); }
 
+    /** Method for showing the visualisation of all the immigrated, dutch actors */
     public void btnPress_ShowVisualisationWorld(ActionEvent e){ main.GetVisualisation().ShowVisualisation("ImmigratieNederlanders"); }
 
 }

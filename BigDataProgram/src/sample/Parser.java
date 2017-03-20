@@ -23,6 +23,7 @@ public class Parser {
         this.controller = Controller.GetInstance();
     }
 
+    /** Method that converts a chosen file */
     public void ParseFile(String fileToConvert) throws IOException {
         controller.UpdateStatusLabel("Converting " + Paths.get(fileToConvert).getFileName() + "...");
         controller.btn_ParseFiles.setDisable(true);
@@ -112,6 +113,7 @@ public class Parser {
         }
     }
 
+    /** Method for getting the correct parserMethod based on chosen filename. */
     public String GetMethodByFileName(String sourceFileName){
         ArrayList<String> availableMethods = parserMethods.supportedFiles;
         for (int i = 0; i < availableMethods.size(); i++){
